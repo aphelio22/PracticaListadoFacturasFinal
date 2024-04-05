@@ -13,7 +13,7 @@
         app:navigationIcon="@drawable/chevron_left"
         app:title="Atrás"
         app:titleTextColor="?attr/colorPrimary"
-        app:navigationIconTint="@color/paidInvoice">
+        app:navigationIconTint="?attr/colorPrimary">
 
     </com.google.android.material.appbar.MaterialToolbar>
 

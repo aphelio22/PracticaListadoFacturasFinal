@@ -9,16 +9,10 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_arrow_back_ios"
-        app:navigationIconTint="@color/paidInvoice">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Atrás"
-            android:textStyle="bold"
-            android:textColor="@color/paidInvoice"
-            android:textSize="16sp" />
+        app:navigationIcon="@drawable/chevron_left"
+        app:title="Atrás"
+        app:titleTextColor="?attr/colorPrimary"
+        app:navigationIconTint="?attr/colorPrimary">
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -74,7 +68,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tlEnergy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" >
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout="@layout/fragment_energy_first"
+            >
 
         </androidx.fragment.app.FragmentContainerView>
 

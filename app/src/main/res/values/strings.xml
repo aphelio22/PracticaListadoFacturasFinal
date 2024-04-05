@@ -31,4 +31,5 @@
     <string name="instalationText">Aquí tienes los datos de tu instalación fotovoltaica en tiempo real.</string>
     <string name="autoconsumeInstalation">Autoconsumo:</string>
     <string name="instalationPercent">92%</string>
+    <string name="textEnergy">Estamos trabajando en mejorar la App. Tus paneles solares siguen produciendo, en breve podrás seguir viendo tu producción solar. Sentimos las molestias.</string>
 </resources>
