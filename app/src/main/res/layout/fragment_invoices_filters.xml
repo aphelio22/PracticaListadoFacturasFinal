@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.InvoicesFiltersFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btApplyFilters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvIssueDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/issueDateTitle"
+                android:textColor="@color/titles"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvSince"
+                app:layout_constraintStart_toStartOf="@+id/tvSince"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSince"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/sinceTitle"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/btMinDate"
+                app:layout_constraintStart_toStartOf="@+id/btMinDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvUntil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/untilTitle"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/btMaxDate"
+                app:layout_constraintStart_toStartOf="@+id/btMaxDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btMinDate"
+                android:background="@drawable/round_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="300dp"
+                android:layout_marginBottom="480dp"
+                android:text="@string/dayMonthYear"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btMaxDate"
+                android:background="@drawable/round_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="254dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="480dp"
+                android:text="@string/dayMonthYear"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vIssueDateToAmountTitle"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/btMinDate" />
+
+            <TextView
+                android:id="@+id/tvAmountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/amountTitle"
+                android:textColor="@color/titles"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="25dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvMinSeekbar"
+                app:layout_constraintStart_toStartOf="@+id/seekBar"
+                app:layout_constraintTop_toBottomOf="@+id/vIssueDateToAmountTitle" />
+
+            <TextView
+                android:id="@+id/tvMinSeekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minAmount"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                app:layout_constraintStart_toStartOf="@+id/seekBar" />
+
+            <TextView
+                android:id="@+id/seekBarValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/SeekBarProgress"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                app:layout_constraintEnd_toEndOf="@+id/vIssueDateToAmountTitle"
+                app:layout_constraintStart_toStartOf="@+id/vIssueDateToAmountTitle"
+                app:layout_constraintTop_toBottomOf="@+id/vIssueDateToAmountTitle" />
+
+            <TextView
+                android:id="@+id/tvMaxSeekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/maxAmount"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                app:layout_constraintEnd_toEndOf="@+id/seekBar" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vIssueDateToAmountTitle" />
+
+            <View
+                android:id="@+id/vAmountTitleToTitleState"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+            <TextView
+                android:id="@+id/tvTitleState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="325dp"
+                android:text="@string/stateTitle"
+                android:textColor="@color/titles"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/seekBar"
+                app:layout_constraintTop_toBottomOf="@+id/vAmountTitleToTitleState" />
+
+            <CheckBox
+                android:id="@+id/cbPaid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="@string/paid"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tvTitleState"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleState" />
+
+            <CheckBox
+                android:id="@+id/cbCanceled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/canceled"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/cbPaid"
+                app:layout_constraintTop_toBottomOf="@+id/cbPaid" />
+
+            <CheckBox
+                android:id="@+id/cbFixedPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/fixedPayment"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/cbCanceled"
+                app:layout_constraintTop_toBottomOf="@+id/cbCanceled" />
+
+            <CheckBox
+                android:id="@+id/cbPendingPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/pendingPayment"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/cbFixedPayment"
+                app:layout_constraintTop_toBottomOf="@+id/cbFixedPayment" />
+
+            <CheckBox
+                android:id="@+id/cbPaymentPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/paymentPlan"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/cbPendingPayment"
+                app:layout_constraintTop_toBottomOf="@+id/cbPendingPayment" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btApplyFilters"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/applyFilters"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@drawable/round_button"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btRestoreFilters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btRestoreFilters"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:text="@string/deleteFilters"
+        android:textAllCaps="false"
+        android:textColor="@color/delete"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btApplyFilters"
+        app:layout_constraintStart_toStartOf="@+id/btApplyFilters" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
