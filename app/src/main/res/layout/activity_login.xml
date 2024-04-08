@@ -9,7 +9,7 @@
     tools:context=".ui.activities.LoginActivity">
 
     <ImageView
-        android:id="@+id/ivLoginIber"
+        android:id="@+id/ivForgotIber"
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:src="@drawable/ic_logo_iberdrola_cli"
@@ -23,26 +23,26 @@
         android:id="@+id/spacerToImageView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:layout_constraintTop_toBottomOf="@id/ivLoginIber"
+        app:layout_constraintTop_toBottomOf="@id/ivForgotIber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <EditText
-        android:id="@+id/etLoginUser"
+        android:id="@+id/etEmailUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/spacerToImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/userHintLogin"
+        android:hint="@string/emailHintLogin"
         />
 
     <EditText
         android:id="@+id/etLoginPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/etLoginUser"
+        app:layout_constraintTop_toBottomOf="@id/etEmailUser"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

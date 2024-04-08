@@ -1,10 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
     tools:context=".ui.fragments.EnergyThirdFragment">
 
+    <TextView
+        android:id="@+id/tvAutoconsumeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/autoconsumeTitle_DetailsFragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/etConsumeCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvAutoconsumeTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/autoconsumeCode_DetailsFragment"
+        android:inputType="none"
+        android:focusable="false"
+        />
+
+    <TextView
+        android:id="@+id/tvRequestState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/requestStateTite_DetailsFragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etConsumeCode"
+        />
+
+    <EditText
+        android:id="@+id/etRequestState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestState"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/requestStatePlot_DetailsFragment"
+        android:inputType="none"
+        android:focusable="false"
+        />
+
+    <TextView
+        android:id="@+id/tvAutoconsumeType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/autoconsumeTypeTitle_DetailsFragment"
+        app:layout_constraintTop_toBottomOf="@id/etRequestState"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/etAutoconsumeType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvAutoconsumeType"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/autoconsumeTypePlot_DetailsFragment"
+        android:inputType="none"
+        android:focusable="false"
+        />
+
+    <TextView
+        android:id="@+id/tvOverageCompensation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/overageCompensation_DetailsFragment"
+        app:layout_constraintTop_toBottomOf="@id/etAutoconsumeType"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/etOverageCompensation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvOverageCompensation"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/overageCompensationPlot_DetailsFragment"
+        android:inputType="none"
+        android:focusable="false"
+        />
+
+    <TextView
+        android:id="@+id/tvPowerInstalation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/overageCompensation_DetailsFragment"
+        app:layout_constraintTop_toBottomOf="@id/etOverageCompensation"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/etPowerInstalation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvPowerInstalation"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/powerInstalation_DetailsFragment"
+        android:inputType="none"
+        android:focusable="false"
+        />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,10 +33,24 @@
     <string name="instalationPercent">92%</string>
     <string name="textEnergy">Estamos trabajando en mejorar la App. Tus paneles solares siguen produciendo, en breve podrás seguir viendo tu producción solar. Sentimos las molestias.</string>
     <string name="rememberUserLogin">Recordar usuario</string>
-    <string name="userHintLogin">Usuario</string>
+    <string name="emailHintLogin">Email</string>
     <string name="passHintLogin">Contraseña</string>
     <string name="forgetPassLogin">He olvidado mis datos</string>
     <string name="loginLogin">Entrar</string>
     <string name="dividerTextLogin">También puedes</string>
-    <string name="registerLogin">Registrarte</string>
+    <string name="registerLogin">Registrarse</string>
+    <string name="emailResetForgot">Introduce tu email</string>
+    <string name="resetMessageForgot">Si has olvidado tu contraseña por el correo perteneciente a tu cuenta y te enviaremos un mensaje para restablecerla.</string>
+    <string name="tvPassResetForgot">Restablece tu contraseña:</string>
+    <string name="returnToLoginForgot">Volver a inicio de sesión</string>
+    <string name="repeatPassSignUp">Repite la contraseña</string>
+    <string name="autoconsumeTitle_DetailsFragment">CAU (Código Autoconsumo)</string>
+    <string name="autoconsumeCode_DetailsFragment">ES0021000000001994LJ1FA000</string>
+    <string name="requestStateTite_DetailsFragment">Estado solicitud alta autoconsumidor</string>
+    <string name="requestStatePlot_DetailsFragment">No hemos recibido ninguna solicitud de autoconsumo</string>
+    <string name="autoconsumeTypeTitle_DetailsFragment">Tipo autoconsumo</string>
+    <string name="autoconsumeTypePlot_DetailsFragment">Con excedentes y compensación individual - Consumo</string>
+    <string name="overageCompensation_DetailsFragment">Compensación de excedentes</string>
+    <string name="overageCompensationPlot_DetailsFragment">Precio PVPC</string>
+    <string name="powerInstalation_DetailsFragment">5kWp</string>
 </resources>

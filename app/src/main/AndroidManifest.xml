@@ -23,9 +23,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.InvoiceActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,8 +31,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activities.InvoiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.SelectionActivityM"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>
