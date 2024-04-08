@@ -1,0 +1,15 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Color de fondo transparente -->
+    <solid android:color="@android:color/transparent" />
+
+    <!-- Borde verde -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/seed" /> <!-- Cambia este valor por el verde que desees -->
+
+    <!-- Esquinas redondeadas -->
+    <corners android:radius="150dp" /> <!-- Puedes ajustar el radio según tu preferencia -->
+
+</shape>

@@ -32,4 +32,11 @@
     <string name="autoconsumeInstalation">Autoconsumo:</string>
     <string name="instalationPercent">92%</string>
     <string name="textEnergy">Estamos trabajando en mejorar la App. Tus paneles solares siguen produciendo, en breve podrás seguir viendo tu producción solar. Sentimos las molestias.</string>
+    <string name="rememberUserLogin">Recordar usuario</string>
+    <string name="userHintLogin">Usuario</string>
+    <string name="passHintLogin">Contraseña</string>
+    <string name="forgetPassLogin">He olvidado mis datos</string>
+    <string name="loginLogin">Entrar</string>
+    <string name="dividerTextLogin">También puedes</string>
+    <string name="registerLogin">Registrarte</string>
 </resources>
