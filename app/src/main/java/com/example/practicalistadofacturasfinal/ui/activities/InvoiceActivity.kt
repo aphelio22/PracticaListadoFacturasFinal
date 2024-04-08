@@ -16,13 +16,16 @@ class InvoiceActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityInvoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setInsets()
+    }
+
+    private fun setInsets() {
+        val padding = resources.getDimension(R.dimen.activities_fragments_padding).toInt()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left + padding, systemBars.top + padding, systemBars.right, + systemBars.bottom + padding)
             insets
         }
-
-        supportActionBar?.setTitle("Facturas")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
