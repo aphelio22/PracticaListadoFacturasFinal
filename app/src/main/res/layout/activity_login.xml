@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
+    android:layout_margin="30dp"
     tools:context=".ui.activities.LoginActivity">
 
     <ImageView
@@ -79,7 +79,7 @@
     <Space
         android:id="@+id/spacerToTextView"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvForgetPass"/>
