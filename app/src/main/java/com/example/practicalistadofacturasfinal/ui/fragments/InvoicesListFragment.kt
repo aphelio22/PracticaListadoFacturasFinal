@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class InvoicesListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setOnClickListener()
         viewModel.getInvoices().observe(viewLifecycleOwner) { invoices ->
             binding.rvInvoices.layoutManager = LinearLayoutManager(context)
             adapter = InvoiceAdapter(invoices) { practice ->
@@ -50,5 +52,19 @@ class InvoicesListFragment : Fragment() {
     }
 
     private fun onItemSelected(practice: InvoiceResponse) {
+
+    }
+
+    private fun setOnClickListener() {
+        binding.materialToolBar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.invoiceMenuMain -> {
+                    val action = InvoicesListFragmentDirections.actionInvoicesListFragmentToInvoicesFiltersFragment()
+                    findNavController().navigate(action)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }

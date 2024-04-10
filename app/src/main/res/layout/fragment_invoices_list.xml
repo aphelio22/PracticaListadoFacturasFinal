@@ -13,7 +13,8 @@
         app:navigationIcon="@drawable/chevron_left"
         app:title="Atrás"
         app:titleTextColor="?attr/colorPrimary"
-        app:navigationIconTint="?attr/colorPrimary">
+        app:navigationIconTint="?attr/colorPrimary"
+        app:menu="@menu/menu_main_activity">
 
     </com.google.android.material.appbar.MaterialToolbar>
 
