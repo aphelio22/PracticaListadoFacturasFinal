@@ -1,8 +1,10 @@
 package com.example.practicalistadofacturasfinal.ui.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,11 +15,13 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivityMainBinding
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
+import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 
 class SelectionActivityM : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
+    private val viewModel: InvoiceActivityViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -25,6 +29,12 @@ class SelectionActivityM : AppCompatActivity() {
         setContentView(binding.root)
         setInsets()
         initRecyclerView()
+        viewModel.getInvoices().observe(this) { invoices ->
+            // Aquí puedes hacer lo que quieras con la lista, por ejemplo, pasársela al adaptador
+            // o imprimir en el registro (log)
+            Log.d("FACTURAS", invoices.toString())
+            //adapter.submitList(invoices)
+        }
     }
 
     private fun initRecyclerView() {
