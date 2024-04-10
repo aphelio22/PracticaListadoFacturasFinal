@@ -29,7 +29,7 @@ class InvoiceActivity : AppCompatActivity() {
         val padding = resources.getDimension(R.dimen.activities_fragments_padding).toInt()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left + padding, systemBars.top + padding, systemBars.right, + systemBars.bottom + padding)
+            v.setPadding(systemBars.left , systemBars.top , systemBars.right, + systemBars.bottom )
             insets
         }
     }

@@ -9,5 +9,14 @@
         android:id="@+id/invoicesListFragment"
         android:name="com.example.practicalistadofacturasfinal.ui.fragments.InvoicesListFragment"
         android:label="fragment_invoices_list"
-        tools:layout="@layout/fragment_invoices_list" />
+        tools:layout="@layout/fragment_invoices_list" >
+        <action
+            android:id="@+id/action_invoicesListFragment_to_invoicesFiltersFragment"
+            app:destination="@id/invoicesFiltersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/invoicesFiltersFragment"
+        android:name="com.example.practicalistadofacturasfinal.ui.fragments.InvoicesFiltersFragment"
+        android:label="fragment_invoices_filters"
+        tools:layout="@layout/fragment_invoices_filters" />
 </navigation>

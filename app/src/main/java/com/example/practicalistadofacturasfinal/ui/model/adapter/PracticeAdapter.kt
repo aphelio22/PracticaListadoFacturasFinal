@@ -7,7 +7,6 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 
 class PracticeAdapter(private var practiceList: List<PracticeVO>, private val onCLickListener: (PracticeVO) -> Unit): RecyclerView.Adapter<PracticeViewHolder> () {
-    private var listPractice: List<PracticeVO>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PracticeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return PracticeViewHolder(layoutInflater.inflate(R.layout.item_practice_selection, parent, false))

@@ -1,5 +1,6 @@
 package com.example.practicalistadofacturasfinal.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -29,12 +30,7 @@ class SelectionActivityM : AppCompatActivity() {
         setContentView(binding.root)
         setInsets()
         initRecyclerView()
-        viewModel.getInvoices().observe(this) { invoices ->
-            // Aquí puedes hacer lo que quieras con la lista, por ejemplo, pasársela al adaptador
-            // o imprimir en el registro (log)
-            Log.d("FACTURAS", invoices.toString())
-            //adapter.submitList(invoices)
-        }
+
     }
 
     private fun initRecyclerView() {
@@ -58,6 +54,12 @@ class SelectionActivityM : AppCompatActivity() {
     }
 
     private fun onItemSelected(practiceVO: PracticeVO) {
-        Toast.makeText(this, "Hola", Toast.LENGTH_SHORT).show()
+        when (practiceVO.id) {
+            1 -> {
+                val miIntent = Intent(this, InvoiceActivity::class.java)
+                startActivity(miIntent)
+            }
+        }
+
     }
 }
