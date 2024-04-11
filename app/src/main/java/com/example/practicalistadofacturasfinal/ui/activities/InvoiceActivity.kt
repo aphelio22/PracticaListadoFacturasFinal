@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivityInvoiceBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
@@ -18,6 +19,7 @@ class InvoiceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        MyApplication()
         binding = ActivityInvoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()

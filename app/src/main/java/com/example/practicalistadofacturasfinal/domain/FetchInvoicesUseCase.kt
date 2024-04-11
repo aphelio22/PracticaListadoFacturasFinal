@@ -3,8 +3,7 @@ package com.example.practicalistadofacturasfinal.domain
 import com.example.practicalistadofacturasfinal.data.InvoiceRepository
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 
-class InvoiceUseCase {
-    private val repository = InvoiceRepository()
+class FetchInvoicesUseCase(private val repository: InvoiceRepository) {
 
     suspend operator fun invoke(): List<InvoiceResponse>? {
         return repository.getDataFromAPI()

@@ -6,26 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicalistadofacturasfinal.R
-import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
+import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
-import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 
 class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
-    private val viewModel: InvoiceActivityViewModel by viewModels()
     private lateinit var adapter: InvoiceAdapter
+    private val viewModel: InvoiceActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.initRepository()
+        viewModel.initFetchUseCase()
+        viewModel.fetchInvoices()
+
     }
 
     override fun onCreateView(
@@ -38,10 +40,11 @@ class InvoicesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setOnClickListener()
-        viewModel.getInvoices().observe(viewLifecycleOwner) { invoices ->
+        viewModel.invoiceLiveData.observe(viewLifecycleOwner) { invoices ->
+
             binding.rvInvoices.layoutManager = LinearLayoutManager(context)
-            adapter = InvoiceAdapter(invoices) { practice ->
-                onItemSelected(practice)
+            adapter = InvoiceAdapter(invoices) { inv ->
+                onItemSelected(inv)
             }
             binding.rvInvoices.adapter = adapter
             val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
@@ -49,9 +52,10 @@ class InvoicesListFragment : Fragment() {
             Log.d("FACTURAS", invoices.toString())
             //adapter.submitList(invoices)
         }
+        //viewModel.getInvoices()
     }
 
-    private fun onItemSelected(practice: InvoiceResponse) {
+    private fun onItemSelected(practice: InvoiceModelRoom) {
 
     }
 
