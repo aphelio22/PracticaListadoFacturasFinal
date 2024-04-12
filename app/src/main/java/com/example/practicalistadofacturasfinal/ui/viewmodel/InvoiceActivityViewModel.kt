@@ -24,11 +24,10 @@ class InvoiceActivityViewModel() : ViewModel() {
         get() = _invoiceLiveData
 
     fun fetchInvoices() {
-        val context = MyApplication.context
         viewModelScope.launch {
             _invoiceLiveData.postValue(invoiceRepository.getAllInvoices())
             try {
-                if (isInternetAvailable(context)) {
+                if (isInternetAvailable()) {
                     invoiceRepository.fetchAndInsertInvoicesFromAPI()
                     _invoiceLiveData.postValue(invoiceRepository.getAllInvoices())
                 }
@@ -46,9 +45,9 @@ class InvoiceActivityViewModel() : ViewModel() {
         fetchInvoicesUseCase = FetchInvoicesUseCase(invoiceRepository)
     }
 
-    private fun isInternetAvailable(context: Context): Boolean {
+    private fun isInternetAvailable(): Boolean {
         val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            MyApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         val network = connectivityManager.activeNetwork
         val capabilities = connectivityManager.getNetworkCapabilities(network)
