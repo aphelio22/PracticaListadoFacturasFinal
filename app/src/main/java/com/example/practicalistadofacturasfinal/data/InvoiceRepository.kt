@@ -16,12 +16,28 @@ class InvoiceRepository() {
         return api.getDataFromAPI()
     }
 
+    suspend fun getDataFromMock(): List<InvoiceResponse>? {
+        return api.getDataFromMock()
+    }
+
     suspend fun insertInvoices(invoices: List<InvoiceModelRoom>) {
         invoiceDAO.insertInvoices(invoices)
     }
 
     fun getAllInvoices(): List<InvoiceModelRoom> {
         return invoiceDAO.getAllInvoices()
+    }
+
+    suspend fun fetchAndInsertInvoicesFromMock() {
+        val invoicesFromMock = api.getDataFromMock() ?: emptyList()
+        val invoicesRoom = invoicesFromMock.map { invoice ->
+            InvoiceModelRoom(
+                descEstado = invoice.descEstado,
+                importeOrdenacion = invoice.importeOrdenacion,
+                fecha = invoice.fecha
+            )
+        }
+        insertInvoices(invoicesRoom)
     }
 
     suspend fun fetchAndInsertInvoicesFromAPI() {

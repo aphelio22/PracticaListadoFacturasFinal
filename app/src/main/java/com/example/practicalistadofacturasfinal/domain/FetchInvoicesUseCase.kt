@@ -8,4 +8,8 @@ class FetchInvoicesUseCase(private val repository: InvoiceRepository) {
     suspend operator fun invoke(): List<InvoiceResponse>? {
         return repository.getDataFromAPI()
     }
+
+    suspend fun invokeMock(): List<InvoiceResponse>? {
+        return repository.getDataFromMock()
+    }
 }

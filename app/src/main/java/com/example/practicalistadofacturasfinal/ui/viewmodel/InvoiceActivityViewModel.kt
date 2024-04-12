@@ -28,11 +28,11 @@ class InvoiceActivityViewModel() : ViewModel() {
             _invoiceLiveData.postValue(invoiceRepository.getAllInvoices())
             try {
                 if (isInternetAvailable()) {
-                    invoiceRepository.fetchAndInsertInvoicesFromAPI()
+                    invoiceRepository.fetchAndInsertInvoicesFromMock()
                     _invoiceLiveData.postValue(invoiceRepository.getAllInvoices())
                 }
             } catch (e: Exception) {
-                Log.d("Error", e.message.toString())
+                Log.d("Error", e.printStackTrace().toString())
             }
         }
     }
