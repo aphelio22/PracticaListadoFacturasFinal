@@ -6,6 +6,7 @@ import com.example.practicalistadofacturasfinal.data.retrofit.network.response.I
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
+import com.example.practicalistadofacturasfinal.domain.FetchInvoicesUseCase
 
 class InvoiceRepository() {
     val invoiceDAO = InvoiceDatabase.getAppDBInstance().getAppDao()
@@ -21,5 +22,17 @@ class InvoiceRepository() {
 
     fun getAllInvoices(): List<InvoiceModelRoom> {
         return invoiceDAO.getAllInvoices()
+    }
+
+    suspend fun fetchAndInsertInvoicesFromAPI() {
+        val invoicesFromAPI = api.getDataFromAPI() ?: emptyList()
+        val invoicesRoom = invoicesFromAPI.map { invoice ->
+            InvoiceModelRoom(
+                descEstado = invoice.descEstado,
+                importeOrdenacion = invoice.importeOrdenacion,
+                fecha = invoice.fecha
+            )
+        }
+        insertInvoices(invoicesRoom)
     }
 }

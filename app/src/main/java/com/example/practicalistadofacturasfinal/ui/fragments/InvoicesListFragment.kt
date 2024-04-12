@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
@@ -40,19 +41,28 @@ class InvoicesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setOnClickListener()
-        viewModel.invoiceLiveData.observe(viewLifecycleOwner) { invoices ->
-
-            binding.rvInvoices.layoutManager = LinearLayoutManager(context)
-            adapter = InvoiceAdapter(invoices) { inv ->
-                onItemSelected(inv)
-            }
-            binding.rvInvoices.adapter = adapter
-            val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
-            binding.rvInvoices.addItemDecoration(decoration)
-            Log.d("FACTURAS", invoices.toString())
-            //adapter.submitList(invoices)
-        }
+        InitViewModel()
         //viewModel.getInvoices()
+    }
+
+    private fun InitViewModel() {
+        viewModel.invoiceLiveData.observe(viewLifecycleOwner) { invoices ->
+            InitRecyclerView(invoices)
+            InitDecoration()
+        }
+    }
+
+    private fun InitDecoration() {
+        val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        binding.rvInvoices.addItemDecoration(decoration)
+    }
+
+    private fun InitRecyclerView(invoices: List<InvoiceModelRoom>) {
+        binding.rvInvoices.layoutManager = LinearLayoutManager(context)
+        adapter = InvoiceAdapter(invoices) { inv ->
+            onItemSelected(inv)
+        }
+        binding.rvInvoices.adapter = adapter
     }
 
     private fun onItemSelected(practice: InvoiceModelRoom) {
