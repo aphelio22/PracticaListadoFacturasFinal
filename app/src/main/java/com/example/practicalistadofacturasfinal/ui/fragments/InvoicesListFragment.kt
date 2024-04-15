@@ -1,6 +1,7 @@
 package com.example.practicalistadofacturasfinal.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,14 +21,13 @@ class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
     private lateinit var adapter: InvoiceAdapter
     private val viewModel: InvoiceActivityViewModel by viewModels()
+    private var maxAmount = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.initRepository()
         viewModel.initFetchUseCase()
         viewModel.fetchInvoices()
-
-
     }
 
     override fun onCreateView(
@@ -53,6 +53,7 @@ class InvoicesListFragment : Fragment() {
 
     private fun InitViewModel() {
         viewModel.invoiceLiveData.observe(viewLifecycleOwner) { invoices ->
+            maxAmount = getMaxAmount(invoices)
             InitRecyclerView(invoices)
             InitDecoration()
         }
@@ -86,5 +87,17 @@ class InvoicesListFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    private fun getMaxAmount(invoiceList: List<InvoiceModelRoom>): Double {
+        var maxAmount = 0.0
+
+        for (invoice in invoiceList) {
+            val actualInvoiceAmount = invoice.importeOrdenacion
+            if (maxAmount < actualInvoiceAmount!!) {
+                maxAmount = actualInvoiceAmount
+            }
+        }
+        return maxAmount
     }
 }
