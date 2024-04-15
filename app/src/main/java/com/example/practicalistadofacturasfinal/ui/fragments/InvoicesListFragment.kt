@@ -29,6 +29,7 @@ class InvoicesListFragment : Fragment() {
         viewModel.initFetchUseCase()
         viewModel.fetchInvoices()
 
+
     }
 
     override fun onCreateView(
@@ -43,6 +44,13 @@ class InvoicesListFragment : Fragment() {
         setOnClickListener()
         InitViewModel()
         //viewModel.getInvoices()
+        binding.switchRetromock.setOnClickListener {
+            if (binding.switchRetromock.isChecked) {
+                viewModel.switchMode(false)
+            } else {
+                viewModel.switchMode(true)
+            }
+        }
     }
 
     private fun InitViewModel() {

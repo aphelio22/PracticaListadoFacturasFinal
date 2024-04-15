@@ -23,12 +23,17 @@ class InvoiceActivityViewModel() : ViewModel() {
     val invoiceLiveData: LiveData<List<InvoiceModelRoom>>
         get() = _invoiceLiveData
 
+    private var useAPI = true
+
     fun fetchInvoices() {
         viewModelScope.launch {
             _invoiceLiveData.postValue(invoiceRepository.getAllInvoices())
             try {
                 if (isInternetAvailable()) {
-                    invoiceRepository.fetchAndInsertInvoicesFromMock()
+                    when(useAPI){
+                        true -> invoiceRepository.fetchAndInsertInvoicesFromAPI()
+                        false -> invoiceRepository.fetchAndInsertInvoicesFromMock()
+                    }
                     _invoiceLiveData.postValue(invoiceRepository.getAllInvoices())
                 }
             } catch (e: Exception) {
@@ -43,6 +48,12 @@ class InvoiceActivityViewModel() : ViewModel() {
 
     fun initFetchUseCase() {
         fetchInvoicesUseCase = FetchInvoicesUseCase(invoiceRepository)
+    }
+
+    fun switchMode(apiMode: Boolean) {
+        invoiceRepository.invoiceDAO.deleteAllInvoices()
+        useAPI = apiMode
+        fetchInvoices()
     }
 
     private fun isInternetAvailable(): Boolean {

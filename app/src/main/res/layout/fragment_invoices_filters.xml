@@ -7,8 +7,11 @@
     tools:context=".ui.fragments.InvoicesFiltersFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        app:title="Filtrar Facturas"
+        app:menu="@menu/menu_filter_activity">
 
     </com.google.android.material.appbar.MaterialToolbar>
 
