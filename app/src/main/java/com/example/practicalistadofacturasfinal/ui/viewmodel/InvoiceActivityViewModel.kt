@@ -15,7 +15,7 @@ import com.example.practicalistadofacturasfinal.domain.FetchInvoicesUseCase
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class InvoicesListFragmentViewModel() : ViewModel() {
+class InvoiceActivityViewModel() : ViewModel() {
     private lateinit var invoiceRepository: InvoiceRepository
     private lateinit var fetchInvoicesUseCase: FetchInvoicesUseCase
 

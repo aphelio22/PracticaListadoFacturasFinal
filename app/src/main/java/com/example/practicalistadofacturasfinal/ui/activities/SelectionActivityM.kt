@@ -14,13 +14,13 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivityMainBinding
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
-import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoicesListFragmentViewModel
+import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 
 class SelectionActivityM : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
-    private val viewModel: InvoicesListFragmentViewModel by viewModels()
+    private val viewModel: InvoiceActivityViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

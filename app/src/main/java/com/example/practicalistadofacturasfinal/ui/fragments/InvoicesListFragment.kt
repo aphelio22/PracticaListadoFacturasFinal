@@ -14,12 +14,12 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
-import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoicesListFragmentViewModel
+import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 
 class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
     private lateinit var adapter: InvoiceAdapter
-    private val viewModel: InvoicesListFragmentViewModel by viewModels()
+    private val viewModel: InvoiceActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

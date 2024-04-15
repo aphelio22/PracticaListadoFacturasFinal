@@ -6,11 +6,11 @@ import com.example.practicalistadofacturasfinal.core.network.retromock.RetroMock
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 
 class InvoiceService {
-    private val retrofit = RetrofitHelper.getRetrofit()
-    private val retromock = RetroMockHelper.getRetromock(retrofit)
+    private val retrofitBuilder = RetrofitHelper.getRetrofit()
+    private val retromockBuilder = RetroMockHelper.getRetromock(retrofitBuilder)
 
     suspend fun getDataFromMock(): List<InvoiceResponse>? {
-        val response = retromock.create(InvoiceClientRetroMock::class.java).getDataFromAPI()
+        val response = retromockBuilder.create(InvoiceClientRetroMock::class.java).getDataFromAPI()
         if (response.isSuccessful) {
             val invoices = response.body()?.facturas
             if (invoices.isNullOrEmpty()) {
@@ -25,7 +25,7 @@ class InvoiceService {
     }
 
     suspend fun getDataFromAPI(): List<InvoiceResponse>? {
-            val response = retrofit.create(InvoiceClient::class.java).getDataFromAPI()
+            val response = retrofitBuilder.create(InvoiceClient::class.java).getDataFromAPI()
            if (response.isSuccessful) {
                val invoices = response.body()?.facturas
                if (invoices.isNullOrEmpty()) {
