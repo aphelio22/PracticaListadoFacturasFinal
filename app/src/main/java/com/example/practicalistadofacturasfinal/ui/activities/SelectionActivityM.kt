@@ -2,8 +2,6 @@ package com.example.practicalistadofacturasfinal.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,13 +14,13 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivityMainBinding
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
-import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
+import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoicesListFragmentViewModel
 
 class SelectionActivityM : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
-    private val viewModel: InvoiceActivityViewModel by viewModels()
+    private val viewModel: InvoicesListFragmentViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

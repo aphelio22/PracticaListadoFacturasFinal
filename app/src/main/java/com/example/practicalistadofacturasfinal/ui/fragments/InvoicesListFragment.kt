@@ -1,7 +1,6 @@
 package com.example.practicalistadofacturasfinal.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +10,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
-import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
+import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoicesListFragmentViewModel
 
 class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
     private lateinit var adapter: InvoiceAdapter
-    private val viewModel: InvoiceActivityViewModel by viewModels()
+    private val viewModel: InvoicesListFragmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
