@@ -1,12 +1,12 @@
 package com.example.practicalistadofacturasfinal.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
+import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 
 class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
     private lateinit var adapter: InvoiceAdapter
-    private val viewModel: InvoiceActivityViewModel by viewModels()
+    private val viewModel: InvoiceActivityViewModel by activityViewModels()
     private var maxAmount = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +54,18 @@ class InvoicesListFragment : Fragment() {
 
     private fun InitViewModel() {
         viewModel.invoiceLiveData.observe(viewLifecycleOwner) { invoices ->
-            maxAmount = getMaxAmount(invoices)
+            var invoicesListWithFilters = applyFilters(invoices, viewModel.filterLiveData)
+            viewModel.findMaxAmount(invoices)
             InitRecyclerView(invoices)
             InitDecoration()
         }
+    }
+
+    private fun applyFilters(
+        invoicesListWithFilters: List<InvoiceModelRoom>?,
+        filterLiveData: LiveData<FilterVO>
+    ): List<InvoiceModelRoom> {
+
     }
 
     private fun InitDecoration() {
@@ -89,15 +98,5 @@ class InvoicesListFragment : Fragment() {
         }
     }
 
-    private fun getMaxAmount(invoiceList: List<InvoiceModelRoom>): Double {
-        var maxAmount = 0.0
 
-        for (invoice in invoiceList) {
-            val actualInvoiceAmount = invoice.importeOrdenacion
-            if (maxAmount < actualInvoiceAmount!!) {
-                maxAmount = actualInvoiceAmount
-            }
-        }
-        return maxAmount
-    }
 }

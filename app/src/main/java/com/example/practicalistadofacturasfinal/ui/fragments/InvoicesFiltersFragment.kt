@@ -3,15 +3,20 @@ package com.example.practicalistadofacturasfinal.ui.fragments
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.SeekBar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesFiltersBinding
-import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
+import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
+import com.google.gson.Gson
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -20,7 +25,12 @@ import java.util.Locale
 
 class InvoicesFiltersFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesFiltersBinding
-    private var maxAmount: Int = 0
+    private val viewModel: InvoiceActivityViewModel by activityViewModels()
+    private lateinit var paid: CheckBox
+    private lateinit var canceled: CheckBox
+    private lateinit var fixedPayment: CheckBox
+    private lateinit var pendingPayment: CheckBox
+    private lateinit var paymentPlan: CheckBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -51,15 +61,55 @@ class InvoicesFiltersFragment : Fragment() {
     }
 
     private fun initApplyFiltersButton() {
+        binding.btApplyFilters.setOnClickListener {
+            val maxValueSlider = binding.seekBarValue.text.toString().toDouble()
 
+            val status = hashMapOf(
+                Constants.PAID_STRING to paid.isChecked,
+                Constants.CANCELED_STRING to canceled.isChecked,
+                Constants.FIXED_PAYMENT_STRING to fixedPayment.isChecked,
+                Constants.PENDING_PAYMENT_STRING to pendingPayment.isChecked,
+                Constants.PAYMENT_PLAN_STRING to paymentPlan.isChecked
+            )
+
+            val minDate = binding.btMinDate.text.toString()
+            val maxDate = binding.btMaxDate.text.toString()
+
+            viewModel.applyFilters(maxDate, minDate, maxValueSlider, status)
+        }
     }
 
     private fun initCheckBoxes() {
-
+        paid = binding.cbPaid
+        canceled = binding.cbCanceled
+        fixedPayment = binding.cbFixedPayment
+        pendingPayment = binding.cbPendingPayment
+        paymentPlan = binding.cbPaymentPlan
     }
 
     private fun initSeekBar() {
+        val maxAmount = viewModel.maxAmount.toInt() + 1
+        binding.seekBar.max = maxAmount
+        binding.tvMaxSeekbar.text = "$maxAmount"
+        binding.tvMinSeekbar.text = "0"
+        binding.seekBarValue.text = "$maxAmount"
+        binding.seekBar.progress = viewModel.maxAmount.toInt()
 
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                binding.seekBarValue.text = progress.toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                //Sin función
+                Log.d("onStartTrackingTouch()", "onStartTrackingTouch: el método ha fallado.")
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                //Sin función
+                Log.d("onStopTrackingTouch()", "onStopTrackingTouch: el método ha fallado.")
+            }
+        })
     }
 
     private fun initCalendar() {

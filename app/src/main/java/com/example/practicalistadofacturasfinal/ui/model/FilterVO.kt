@@ -4,5 +4,5 @@ data class FilterVO (
     var maxDate: String,
     var minDate: String,
     var maxValueSlider: Double,
-    var state: HashMap<String, Boolean>
+    var status: HashMap<String, Boolean>
 )
