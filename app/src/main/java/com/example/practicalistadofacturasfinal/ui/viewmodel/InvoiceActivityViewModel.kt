@@ -60,8 +60,8 @@ class InvoiceActivityViewModel() : ViewModel() {
                     }
                     invoices = invoiceRepository.getAllInvoices()
                     findMaxAmount()
-                    //_filteredInvoicesLiveData.postValue(invoices)
-                    verifyFilters()
+                    _filteredInvoicesLiveData.postValue(invoices)
+                    //verifyFilters()
                 }
             } catch (e: Exception) {
                 Log.d("Error", e.printStackTrace().toString())

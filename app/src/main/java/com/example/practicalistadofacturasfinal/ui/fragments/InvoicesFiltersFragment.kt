@@ -16,6 +16,7 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesFiltersBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.gson.Gson
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -44,7 +45,12 @@ class InvoicesFiltersFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setOnClickListener()
+        val toolbar: MaterialToolbar = binding.materialToolBar
+        toolbar.setNavigationOnClickListener {
+            Log.d("CLICK", "")
+            parentFragmentManager.popBackStack()
+        }
+        //setOnClickListener()
         initComponents()
     }
 
@@ -179,21 +185,6 @@ class InvoicesFiltersFragment : Fragment() {
                 e.printStackTrace()
             }
             datePickerDialog?.show()
-        }
-    }
-
-    private fun setOnClickListener() {
-        binding.materialToolBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.invoiceMenuFilter -> {
-                    val action =
-                        InvoicesFiltersFragmentDirections.actionInvoicesFiltersFragmentToInvoicesListFragment()
-                    findNavController().navigate(action)
-                    true
-                }
-
-                else -> false
-            }
         }
     }
 }

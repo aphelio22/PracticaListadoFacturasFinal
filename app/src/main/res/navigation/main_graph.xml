@@ -18,9 +18,5 @@
         android:id="@+id/invoicesFiltersFragment"
         android:name="com.example.practicalistadofacturasfinal.ui.fragments.InvoicesFiltersFragment"
         android:label="fragment_invoices_filters"
-        tools:layout="@layout/fragment_invoices_filters" >
-        <action
-            android:id="@+id/action_invoicesFiltersFragment_to_invoicesListFragment"
-            app:destination="@id/invoicesListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_invoices_filters" />
 </navigation>
