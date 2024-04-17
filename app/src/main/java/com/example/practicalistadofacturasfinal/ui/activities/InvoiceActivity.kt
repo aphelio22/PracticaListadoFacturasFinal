@@ -20,6 +20,7 @@ class InvoiceActivity : AppCompatActivity() {
         binding = ActivityInvoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
+
     }
 
     private fun setInsets() {

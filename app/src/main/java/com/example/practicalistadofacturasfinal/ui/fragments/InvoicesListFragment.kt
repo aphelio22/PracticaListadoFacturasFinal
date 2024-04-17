@@ -26,9 +26,7 @@ class InvoicesListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initRepository()
-        viewModel.initFetchUseCase()
-        viewModel.fetchInvoices()
+
     }
 
     override fun onCreateView(
@@ -53,20 +51,31 @@ class InvoicesListFragment : Fragment() {
     }
 
     private fun InitViewModel() {
-        viewModel.invoiceLiveData.observe(viewLifecycleOwner) { invoices ->
-            var invoicesListWithFilters = applyFilters(invoices, viewModel.filterLiveData)
-            viewModel.findMaxAmount(invoices)
+        viewModel.filteredInvoicesLiveData.observe(viewLifecycleOwner) { invoices ->
+            //var invoicesListWithFilters = applyFilters(invoices, viewModel.filterLiveData)
             InitRecyclerView(invoices)
             InitDecoration()
+        }
+        viewModel.filterLiveData.observe(viewLifecycleOwner) {filter ->
+            var invoicesListWithFiltersApplied = viewModel.filteredInvoicesLiveData.value
+            if (filter != null) {
+               viewModel.verifyFilters()
+            }
         }
     }
 
     private fun applyFilters(
         invoicesListWithFilters: List<InvoiceModelRoom>?,
-        filterLiveData: LiveData<FilterVO>
-    ): List<InvoiceModelRoom> {
+        filterLiveData: LiveData<FilterVO>?
+    ): List<InvoiceModelRoom>? {
 
+        var invoicesListWithFiltersApplied = invoicesListWithFilters
+
+
+
+        return invoicesListWithFilters
     }
+
 
     private fun InitDecoration() {
         val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
@@ -97,6 +106,4 @@ class InvoicesListFragment : Fragment() {
             }
         }
     }
-
-
 }
