@@ -131,13 +131,13 @@ class InvoiceActivityViewModel() : ViewModel() {
         }
     }
 
-    fun verifyFilters () {
+    fun verifyFilters() {
         var filteredList = verifyDateFilter()
         filteredList = verifyCheckBox(filteredList)
         _filteredInvoicesLiveData.postValue(filteredList)
     }
 
-   private fun verifyDateFilter(): List<InvoiceModelRoom> { // FIXME arreglar filtro fecha
+    private fun verifyDateFilter(): List<InvoiceModelRoom> { // FIXME arreglar filtro fecha
         val maxDate = filterLiveData.value?.maxDate
         val minDate = filterLiveData.value?.minDate
         val filteredList = ArrayList<InvoiceModelRoom>()
@@ -205,7 +205,9 @@ class InvoiceActivityViewModel() : ViewModel() {
                     filteredInvoicesCheckBox.add(invoice)
                 }
             }
+            return filteredInvoicesCheckBox
+        } else {
+            return filteredInvoices ?: emptyList()
         }
-        return filteredInvoicesCheckBox
     }
 }
