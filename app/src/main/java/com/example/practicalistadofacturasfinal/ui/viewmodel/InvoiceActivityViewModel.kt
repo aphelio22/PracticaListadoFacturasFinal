@@ -134,6 +134,7 @@ class InvoiceActivityViewModel() : ViewModel() {
     fun verifyFilters() {
         var filteredList = verifyDateFilter()
         filteredList = verifyCheckBox(filteredList)
+        filteredList = verifyBalanceBar(filteredList)
         _filteredInvoicesLiveData.postValue(filteredList)
     }
 
@@ -209,5 +210,16 @@ class InvoiceActivityViewModel() : ViewModel() {
         } else {
             return filteredInvoices ?: emptyList()
         }
+    }
+    private fun verifyBalanceBar(filteredList: List<InvoiceModelRoom>): List<InvoiceModelRoom> {
+    var filteredInvoicesBalanceBar = ArrayList<InvoiceModelRoom>()
+        val maxValueSlider = filterLiveData.value?.maxValueSlider
+        for (factura in filteredList) {
+            //Se añade la factura a la lista filtrada si su importe es menor que el valor seleccionado.
+            if (factura.importeOrdenacion!! < maxValueSlider!!) {
+                filteredInvoicesBalanceBar.add(factura)
+            }
+        }
+        return filteredInvoicesBalanceBar
     }
 }
