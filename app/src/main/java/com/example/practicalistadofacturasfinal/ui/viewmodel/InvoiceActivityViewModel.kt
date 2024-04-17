@@ -137,7 +137,7 @@ class InvoiceActivityViewModel() : ViewModel() {
         _filteredInvoicesLiveData.postValue(filteredList)
     }
 
-    private fun verifyDateFilter(): List<InvoiceModelRoom> { // FIXME arreglar filtro fecha
+    private fun verifyDateFilter(): List<InvoiceModelRoom> {
         val maxDate = filterLiveData.value?.maxDate
         val minDate = filterLiveData.value?.minDate
         val filteredList = ArrayList<InvoiceModelRoom>()
