@@ -45,12 +45,7 @@ class InvoicesFiltersFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val toolbar: MaterialToolbar = binding.materialToolBar
-        toolbar.setNavigationOnClickListener {
-            Log.d("CLICK", "")
-            parentFragmentManager.popBackStack()
-        }
-        //setOnClickListener()
+        setOnClickListener()
         initComponents()
     }
 
@@ -82,6 +77,7 @@ class InvoicesFiltersFragment : Fragment() {
             val maxDate = binding.btMaxDate.text.toString()
 
             viewModel.applyFilters(maxDate, minDate, maxValueSlider, status)
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
@@ -185,6 +181,18 @@ class InvoicesFiltersFragment : Fragment() {
                 e.printStackTrace()
             }
             datePickerDialog?.show()
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.materialToolBar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.invoiceMenuFilter -> {
+                    requireActivity().supportFragmentManager.popBackStack()
+                    true
+                }
+                else -> false
+            }
         }
     }
 }
