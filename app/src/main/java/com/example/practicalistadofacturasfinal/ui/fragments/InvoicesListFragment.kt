@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.listafacturaspractica.ui.view.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
@@ -76,7 +77,9 @@ class InvoicesListFragment : Fragment() {
     }
 
     private fun onItemSelected(practice: InvoiceModelRoom) {
-
+        val fragmentManager = requireActivity().supportFragmentManager
+        val customPopupFragment = FragmentPopUp(getString(R.string.notImplementedYet))
+        customPopupFragment.show(fragmentManager, "FragmentPopUp")
     }
 
     private fun setOnClickListener() {
