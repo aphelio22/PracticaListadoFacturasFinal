@@ -43,39 +43,24 @@ class InvoicesListFragment : Fragment() {
         //viewModel.getInvoices()
         binding.switchRetromock.setOnClickListener {
             if (binding.switchRetromock.isChecked) {
-                viewModel.switchMode(false)
-            } else {
                 viewModel.switchMode(true)
+            } else {
+                viewModel.switchMode(false)
             }
         }
     }
 
     private fun InitViewModel() {
         viewModel.filteredInvoicesLiveData.observe(viewLifecycleOwner) { invoices ->
-            //var invoicesListWithFilters = applyFilters(invoices, viewModel.filterLiveData)
             InitRecyclerView(invoices)
             InitDecoration()
         }
         viewModel.filterLiveData.observe(viewLifecycleOwner) {filter ->
-            var invoicesListWithFiltersApplied = viewModel.filteredInvoicesLiveData.value
             if (filter != null) {
                viewModel.verifyFilters()
             }
         }
     }
-
-    private fun applyFilters(
-        invoicesListWithFilters: List<InvoiceModelRoom>?,
-        filterLiveData: LiveData<FilterVO>?
-    ): List<InvoiceModelRoom>? {
-
-        var invoicesListWithFiltersApplied = invoicesListWithFilters
-
-
-
-        return invoicesListWithFilters
-    }
-
 
     private fun InitDecoration() {
         val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)

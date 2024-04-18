@@ -11,8 +11,9 @@ import retrofit2.http.GET
 interface InvoiceClientRetroMock {
     @Mock
     @MockResponses(
-        MockResponse(body = "mock.json"),
-        MockResponse(body = "mock2.json")
+        MockResponse(body = "mock3.json"),
+        MockResponse(body = "mock2.json"),
+        MockResponse(body = "mock.json")
     )
     @MockCircular
     @GET("resources")
@@ -20,6 +21,6 @@ interface InvoiceClientRetroMock {
 }
 
 interface InvoiceClient {
-    @GET("facturas") //Final de la URL
+    @GET("/") //Final de la URL. FIXME desactivada por ahora.
     suspend fun getDataFromAPI(): Response<InvoiceRepositoryListResponse>
 }
