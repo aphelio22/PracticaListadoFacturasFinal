@@ -41,7 +41,7 @@ class InvoiceActivityViewModel() : ViewModel() {
     val filterLiveData: LiveData<FilterVO>
         get() = _filterLiveData
 
-    private var useAPI = true
+    private var useAPI = false
 
     init {
         initRepository()
@@ -59,8 +59,8 @@ class InvoiceActivityViewModel() : ViewModel() {
                         false -> invoiceRepository.fetchAndInsertInvoicesFromMock()
                     }
                     invoices = invoiceRepository.getAllInvoices()
-                    findMaxAmount()
                     _filteredInvoicesLiveData.postValue(invoices)
+                    findMaxAmount()
                     //verifyFilters()
                 }
             } catch (e: Exception) {
@@ -211,6 +211,7 @@ class InvoiceActivityViewModel() : ViewModel() {
             return filteredInvoices ?: emptyList()
         }
     }
+
     private fun verifyBalanceBar(filteredList: List<InvoiceModelRoom>): List<InvoiceModelRoom> {
     var filteredInvoicesBalanceBar = ArrayList<InvoiceModelRoom>()
         val maxValueSlider = filterLiveData.value?.maxValueSlider

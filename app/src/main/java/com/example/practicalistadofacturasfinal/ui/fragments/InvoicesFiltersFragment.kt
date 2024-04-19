@@ -14,12 +14,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.constants.Constants
+import com.example.practicalistadofacturasfinal.core.network.toDateString
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesFiltersBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.gson.Gson
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -47,6 +49,7 @@ class InvoicesFiltersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setOnClickListener()
         initComponents()
+        loadFilters()
     }
 
     private fun initComponents() {
@@ -58,7 +61,9 @@ class InvoicesFiltersFragment : Fragment() {
     }
 
     private fun initResetFilterButton() {
-
+        binding.btRestoreFilters.setOnClickListener {
+            resetFilters()
+        }
     }
 
     private fun initApplyFiltersButton() {
@@ -73,8 +78,11 @@ class InvoicesFiltersFragment : Fragment() {
                 Constants.PAYMENT_PLAN_STRING to paymentPlan.isChecked
             )
 
-            val minDate = binding.btMinDate.text.toString()
-            val maxDate = binding.btMaxDate.text.toString()
+            val minDate: String = if (binding.btMinDate.text == getString(R.string.dayMonthYear))
+                LocalDate.ofEpochDay(0).toDateString("dd/MM/yyyy")
+            else binding.btMinDate.text.toString()
+            val maxDate: String =
+                if (binding.btMaxDate.text == getString(R.string.dayMonthYear)) LocalDate.now().toDateString("dd/MM/yyyy") else binding.btMaxDate.text.toString()
 
             viewModel.applyFilters(maxDate, minDate, maxValueSlider, status)
             requireActivity().supportFragmentManager.popBackStack()
@@ -194,5 +202,35 @@ class InvoicesFiltersFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    private fun loadFilters() {
+        if (viewModel.filterLiveData.value != null) {
+            binding.btMinDate.text = viewModel.filterLiveData.value?.minDate
+            binding.btMaxDate.text = viewModel.filterLiveData.value?.maxDate
+            binding.seekBar.progress = viewModel.filterLiveData.value?.maxValueSlider?.toInt()!!
+            binding.cbPaid.isChecked =
+                viewModel.filterLiveData.value?.status?.get(Constants.PAID_STRING) ?: false
+            binding.cbCanceled.isChecked =
+                viewModel.filterLiveData.value?.status?.get(Constants.CANCELED_STRING) ?: false
+            binding.cbFixedPayment.isChecked =
+                viewModel.filterLiveData.value?.status?.get(Constants.FIXED_PAYMENT_STRING) ?: false
+            binding.cbPendingPayment.isChecked =
+                viewModel.filterLiveData.value?.status?.get(Constants.PENDING_PAYMENT_STRING)
+                    ?: false
+            binding.cbPaymentPlan.isChecked =
+                viewModel.filterLiveData.value?.status?.get(Constants.PAYMENT_PLAN_STRING) ?: false
+        }
+    }
+
+    private fun resetFilters () {
+        binding.btMinDate.text = getString(R.string.dayMonthYear)
+        binding.btMaxDate.text = getString(R.string.dayMonthYear)
+        binding.seekBar.progress = viewModel.maxAmount.toInt() + 1
+        binding.cbPaid.isChecked = false
+        binding.cbCanceled.isChecked = false
+        binding.cbFixedPayment.isChecked = false
+        binding.cbPendingPayment.isChecked = false
+        binding.cbPaymentPlan.isChecked = false
     }
 }
