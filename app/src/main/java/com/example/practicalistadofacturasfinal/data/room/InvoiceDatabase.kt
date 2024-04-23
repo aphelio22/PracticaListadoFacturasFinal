@@ -1,6 +1,5 @@
 package com.example.practicalistadofacturasfinal.data.room
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,7 +8,7 @@ import com.example.practicalistadofacturasfinal.MyApplication
 /**
  * Clase abstracta que crea la Base de Datos.
  */
-@Database(entities = [InvoiceModelRoom::class], version = 1, exportSchema = false)
+@Database(entities = [InvoiceModelRoom::class, EnergyDataModelRoom::class], version = 1, exportSchema = false)
 abstract class InvoiceDatabase: RoomDatabase() {
 
     /**
@@ -17,7 +16,8 @@ abstract class InvoiceDatabase: RoomDatabase() {
      *
      * @return Un objeto de clase InvoiceDAO.
      */
-    abstract fun getAppDao(): InvoiceDAO
+    abstract fun getInvoiceDao(): InvoiceDAO
+    abstract fun getEnergyDataDao(): EnergyDataDAO
     companion object{
         //Instancia de la Base de Datos.
         private var DB_INSTANCE: InvoiceDatabase? = null

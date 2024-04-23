@@ -3,7 +3,9 @@ package com.example.practicalistadofacturasfinal.data.retrofit.network
 import android.util.Log
 import com.example.practicalistadofacturasfinal.core.network.retrofit.RetrofitHelper
 import com.example.practicalistadofacturasfinal.core.network.retromock.RetroMockHelper
+import com.example.practicalistadofacturasfinal.data.retrofit.network.response.EnergyDetail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
+import kotlin.enums.enumEntries
 
 class InvoiceService {
     private val retrofitBuilder = RetrofitHelper.getRetrofit()
@@ -37,5 +39,16 @@ class InvoiceService {
                Log.d("Failure", response.toString())
                return null
            }
+    }
+
+    suspend fun getDataEnergyFromMock(): EnergyDetail? {
+        val response = retromockBuilder.create(EnergyDataRetroMock::class.java).getDataEnergyFromMock()
+        if (response.isSuccessful) {
+            val energyData = response.body()
+            return energyData
+        } else{
+            Log.d("ENERGY", "Algo salio mal")
+            return null
+        }
     }
 }

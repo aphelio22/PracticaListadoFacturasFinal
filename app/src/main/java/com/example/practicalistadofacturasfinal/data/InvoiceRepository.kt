@@ -1,15 +1,15 @@
 package com.example.practicalistadofacturasfinal.data
 
-import androidx.lifecycle.LiveData
 import com.example.practicalistadofacturasfinal.data.retrofit.network.InvoiceService
+import com.example.practicalistadofacturasfinal.data.retrofit.network.response.EnergyDetail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
-import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
+import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
-import com.example.practicalistadofacturasfinal.domain.FetchInvoicesUseCase
 
 class InvoiceRepository() {
-    val invoiceDAO = InvoiceDatabase.getAppDBInstance().getAppDao()
+    val invoiceDAO = InvoiceDatabase.getAppDBInstance().getInvoiceDao()
+    val energyDao = InvoiceDatabase.getAppDBInstance().getEnergyDataDao()
     val api = InvoiceService()
 
     suspend fun getDataFromAPI(): List<InvoiceResponse>? {
@@ -18,6 +18,14 @@ class InvoiceRepository() {
 
     suspend fun getDataFromMock(): List<InvoiceResponse>? {
         return api.getDataFromMock()
+    }
+
+    suspend fun getEnergyDataFromMock(): EnergyDetail? {
+        return api.getDataEnergyFromMock()
+    }
+
+    suspend fun insertEnergyData(energyDataModelRoom: EnergyDataModelRoom) {
+        energyDao.insertInvoices(energyDataModelRoom)
     }
 
     suspend fun insertInvoices(invoices: List<InvoiceModelRoom>) {
@@ -50,5 +58,13 @@ class InvoiceRepository() {
             )
         }
         insertInvoices(invoicesRoom)
+    }
+
+    suspend fun fetchAndInsertEnergyDataFromMock() {
+        val energyDetail = api.getDataEnergyFromMock()
+        val energyDetailRoom = energyDetail?.asEnergyDataModelRoom()
+        if (energyDetailRoom != null) {
+            insertEnergyData(energyDetailRoom)
+        }
     }
 }
