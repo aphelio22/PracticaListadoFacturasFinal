@@ -62,6 +62,7 @@
             android:text="@string/smart_solar_activity_energy" />
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
