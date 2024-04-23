@@ -59,7 +59,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Smart Solar" />
+            android:text="@string/smart_solar_activity_energy" />
 
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
