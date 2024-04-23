@@ -6,7 +6,7 @@ import java.io.InputStream
 
 class ResourceBodyFactory: BodyFactory {
     @Throws(IOException::class)
-    override fun create(input: String): InputStream? {
-        return ResourceBodyFactory::class.java.classLoader?.getResourceAsStream(input)
+    override fun create(input: String): InputStream {
+        return ResourceBodyFactory::class.java.classLoader?.getResourceAsStream(input) ?: throw IOException()
     }
 }
