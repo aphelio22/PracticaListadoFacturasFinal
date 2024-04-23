@@ -21,6 +21,7 @@ class EnergyActivity : AppCompatActivity() {
         binding = ActivityEnergyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
+        setOnClickListener()
 
         binding.tlEnergy.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -42,6 +43,12 @@ class EnergyActivity : AppCompatActivity() {
             }
         })
         replaceFragment(EnergyFirstFragment())
+    }
+
+    private fun setOnClickListener() {
+        binding.materialToolBar.setNavigationOnClickListener {
+            startActivity(SelectionActivityM.Companion.create(this))
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
