@@ -15,6 +15,7 @@ import com.example.listafacturaspractica.ui.view.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
+import com.example.practicalistadofacturasfinal.ui.activities.SelectionActivityM
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
@@ -83,6 +84,10 @@ class InvoicesListFragment : Fragment() {
     }
 
     private fun setOnClickListener() {
+        binding.materialToolBar.setNavigationOnClickListener {
+            startActivity(SelectionActivityM.Companion.create(requireContext()))
+        }
+
         binding.materialToolBar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.invoiceMenuMain -> {

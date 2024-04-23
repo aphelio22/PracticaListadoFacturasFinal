@@ -1,5 +1,6 @@
 package com.example.practicalistadofacturasfinal.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +22,14 @@ class SelectionActivityM : AppCompatActivity() {
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
     private val viewModel: InvoiceActivityViewModel by viewModels()
+
+    companion object {
+        fun create(context: Context): Intent {
+            val miIntent = Intent(context, SelectionActivityM::class.java)
+            miIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            return miIntent
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,7 +41,7 @@ class SelectionActivityM : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        practiceList = (listOf(PracticeVO(1, "Práctica 1"), PracticeVO(2, "Práctica 2")))
+        practiceList = (listOf(PracticeVO(1, "Práctica 1"), PracticeVO(2, "Práctica 2"), PracticeVO(3, "Navegación")))
         binding.rvPracticeSelection.layoutManager = LinearLayoutManager(this)
         adapter = PracticeAdapter(practiceList) { practice ->
             onItemSelected(practice)
@@ -55,6 +64,14 @@ class SelectionActivityM : AppCompatActivity() {
         when (practiceVO.id) {
             1 -> {
                 val miIntent = Intent(this, InvoiceActivity::class.java)
+                startActivity(miIntent)
+            }
+            2 -> {
+                val miIntent = Intent(this, EnergyActivity::class.java)
+                startActivity(miIntent)
+            }
+            3 -> {
+                val miIntent = Intent(this, WebViewActivity::class.java)
                 startActivity(miIntent)
             }
         }

@@ -19,7 +19,7 @@ class EnergyActivity : AppCompatActivity() {
     }
 
     private fun setInsets() {
-        val padding = resources.getDimension(R.dimen.activities_fragments_padding).toInt()
+        val padding = resources.getDimension(R.dimen.activity_energy).toInt()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left + padding, systemBars.top + padding, systemBars.right + padding, systemBars.bottom + padding)

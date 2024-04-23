@@ -53,4 +53,7 @@
     <string name="overageCompensation_DetailsFragment">Compensación de excedentes</string>
     <string name="overageCompensationPlot_DetailsFragment">Precio PVPC</string>
     <string name="powerInstalation_DetailsFragment">5kWp</string>
+    <string name="webviewText">Desde una aplicación Android, se puede acceder páginas web, mediante el navegador externo o mediante Webviews.</string>
+    <string name="open_external_web">Abrir navegador externo</string>
+    <string name="openWebView_ActivityWebview">Abrir Webview</string>
 </resources>
