@@ -19,6 +19,7 @@ class WebViewActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         setInsets()
+        setOnClickListener()
 
         val webView: WebView = binding.webView
 
@@ -29,6 +30,12 @@ class WebViewActivity : AppCompatActivity() {
         binding.btnExternalWeb.setOnClickListener {
             val miIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.iberdrola.es"))
             startActivity(miIntent)
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.materialToolBar.setNavigationOnClickListener {
+            startActivity(SelectionActivityM.Companion.create(this))
         }
     }
 
