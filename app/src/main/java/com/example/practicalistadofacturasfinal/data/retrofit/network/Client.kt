@@ -4,7 +4,7 @@ import co.infinum.retromock.meta.Mock
 import co.infinum.retromock.meta.MockCircular
 import co.infinum.retromock.meta.MockResponse
 import co.infinum.retromock.meta.MockResponses
-import com.example.practicalistadofacturasfinal.data.retrofit.network.response.EnergyDetail
+import com.example.practicalistadofacturasfinal.data.retrofit.network.response.Detail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceRepositoryListResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,10 +28,10 @@ interface EnergyDataRetroMock {
     )
     @MockCircular
     @GET("resources")
-    suspend fun getDataEnergyFromMock(): Response<EnergyDetail>
+    suspend fun getDataEnergyFromMock(): Response<Detail>
 }
 
 interface InvoiceClient {
-    @GET("/") //Final de la URL. FIXME desactivada por ahora.
+    @GET("facturas")
     suspend fun getDataFromAPI(): Response<InvoiceRepositoryListResponse>
 }

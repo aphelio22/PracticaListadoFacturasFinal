@@ -1,7 +1,6 @@
 package com.example.practicalistadofacturasfinal.data
 
 import com.example.practicalistadofacturasfinal.data.retrofit.network.InvoiceService
-import com.example.practicalistadofacturasfinal.data.retrofit.network.response.EnergyDetail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
@@ -18,10 +17,6 @@ class AppRepository() {
 
     suspend fun getDataFromMock(): List<InvoiceResponse>? {
         return api.getDataFromMock()
-    }
-
-    suspend fun getEnergyDataFromMock(): EnergyDetail? {
-        return api.getDataEnergyFromMock()
     }
 
     suspend fun insertEnergyData(energyDataModelRoom: EnergyDataModelRoom) {
