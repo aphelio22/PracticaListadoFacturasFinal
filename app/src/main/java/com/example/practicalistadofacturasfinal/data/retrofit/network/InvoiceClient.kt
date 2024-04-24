@@ -27,7 +27,7 @@ interface EnergyDataRetroMock {
         MockResponse(body = "mock4.json")
     )
     @MockCircular
-    @GET("resoruces")
+    @GET("resources")
     suspend fun getDataEnergyFromMock(): Response<EnergyDetail>
 }
 

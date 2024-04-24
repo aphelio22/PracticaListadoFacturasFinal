@@ -9,5 +9,5 @@ class EnergyDataModelRoom (
     val requestStatus: String,
     val selfConsumptionType: String,
     val surplusCompensation: String,
-    val IntsllationPower: String
+    val installationPower: String
 )

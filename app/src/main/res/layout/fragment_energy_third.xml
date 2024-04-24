@@ -8,105 +8,105 @@
     tools:context=".ui.fragments.EnergyThirdFragment">
 
     <TextView
-        android:id="@+id/tvAutoconsumeTitle"
+        android:id="@+id/tvCau"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/autoconsumeTitle_DetailsFragment"
+        tools:text="@string/cauTitle_EnergyThirdFragment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <EditText
-        android:id="@+id/etConsumeCode"
+        android:id="@+id/etCau"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvAutoconsumeTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvCau"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/autoconsumeCode_DetailsFragment"
+        tools:text="@string/cauContent_EnergyThirdFragment"
         android:inputType="none"
         android:focusable="false"
         />
 
     <TextView
-        android:id="@+id/tvRequestState"
+        android:id="@+id/tvRequestStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/requestStateTite_DetailsFragment"
+        android:text="@string/requestStatus_EnergyThirdFragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etConsumeCode"
+        app:layout_constraintTop_toBottomOf="@id/etCau"
         />
 
     <EditText
-        android:id="@+id/etRequestState"
+        android:id="@+id/etRequestStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvRequestState"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestStatus"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/requestStatePlot_DetailsFragment"
+        tools:text="@string/requestStatusContent_EnergyThirdFragment"
         android:inputType="none"
         android:focusable="false"
         />
 
     <TextView
-        android:id="@+id/tvAutoconsumeType"
+        android:id="@+id/tvSelfConsumption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/autoconsumeTypeTitle_DetailsFragment"
-        app:layout_constraintTop_toBottomOf="@id/etRequestState"
+        android:text="@string/selfConsumptionTitle_EnergyThirdFragment"
+        app:layout_constraintTop_toBottomOf="@id/etRequestStatus"
         app:layout_constraintStart_toStartOf="parent"
         />
 
     <EditText
-        android:id="@+id/etAutoconsumeType"
+        android:id="@+id/etSelfConsumption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvAutoconsumeType"
+        app:layout_constraintTop_toBottomOf="@id/tvSelfConsumption"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/autoconsumeTypePlot_DetailsFragment"
+        tools:text="@string/selfConsumptionContent_EnergyThirdFragment"
         android:inputType="none"
         android:focusable="false"
         />
 
     <TextView
-        android:id="@+id/tvOverageCompensation"
+        android:id="@+id/tvSurplusCompensation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/overageCompensation_DetailsFragment"
-        app:layout_constraintTop_toBottomOf="@id/etAutoconsumeType"
+        android:text="@string/surplusCompensationTitle_EnergyThridFragment"
+        app:layout_constraintTop_toBottomOf="@id/etSelfConsumption"
         app:layout_constraintStart_toStartOf="parent"
         />
 
     <EditText
-        android:id="@+id/etOverageCompensation"
+        android:id="@+id/etSurplusCompensation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvOverageCompensation"
+        app:layout_constraintTop_toBottomOf="@id/tvSurplusCompensation"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/overageCompensationPlot_DetailsFragment"
+        tools:text="@string/surplusCompensationContent_EnergyThirdFragment"
         android:inputType="none"
         android:focusable="false"
         />
 
     <TextView
-        android:id="@+id/tvPowerInstalation"
+        android:id="@+id/tvInstallationPower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/overageCompensation_DetailsFragment"
-        app:layout_constraintTop_toBottomOf="@id/etOverageCompensation"
+        android:text="@string/installationPowerTitle_EnergyThirdFragment"
+        app:layout_constraintTop_toBottomOf="@id/etSurplusCompensation"
         app:layout_constraintStart_toStartOf="parent"
         />
 
     <EditText
-        android:id="@+id/etPowerInstalation"
+        android:id="@+id/etInstallationPower"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvPowerInstalation"
+        app:layout_constraintTop_toBottomOf="@id/tvInstallationPower"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/powerInstalation_DetailsFragment"
+        tools:text="@string/installationPowerContent_EnergyThirdFragment"
         android:inputType="none"
         android:focusable="false"
         />

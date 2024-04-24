@@ -12,7 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.constants.Constants
-import com.example.practicalistadofacturasfinal.data.InvoiceRepository
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.domain.FetchInvoicesUseCase
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
@@ -24,7 +24,7 @@ import java.util.Date
 import java.util.Locale
 
 class InvoiceActivityViewModel() : ViewModel() {
-    private lateinit var invoiceRepository: InvoiceRepository
+    private lateinit var appRepository: AppRepository
     private lateinit var fetchInvoicesUseCase: FetchInvoicesUseCase
 
     private var invoices: List<InvoiceModelRoom> = emptyList()
@@ -51,14 +51,14 @@ class InvoiceActivityViewModel() : ViewModel() {
 
     fun fetchInvoices() {
         viewModelScope.launch {
-            _filteredInvoicesLiveData.postValue(invoiceRepository.getAllInvoices())
+            _filteredInvoicesLiveData.postValue(appRepository.getAllInvoices())
             try {
                 if (isInternetAvailable()) {
                     when (useAPI) {
-                        true -> invoiceRepository.fetchAndInsertInvoicesFromAPI()
-                        false -> invoiceRepository.fetchAndInsertInvoicesFromMock()
+                        true -> appRepository.fetchAndInsertInvoicesFromAPI()
+                        false -> appRepository.fetchAndInsertInvoicesFromMock()
                     }
-                    invoices = invoiceRepository.getAllInvoices()
+                    invoices = appRepository.getAllInvoices()
                     _filteredInvoicesLiveData.postValue(invoices)
                     findMaxAmount()
                     //verifyFilters()
@@ -70,15 +70,15 @@ class InvoiceActivityViewModel() : ViewModel() {
     }
 
     fun initRepository() {
-        invoiceRepository = InvoiceRepository()
+        appRepository = AppRepository()
     }
 
     fun initFetchUseCase() {
-        fetchInvoicesUseCase = FetchInvoicesUseCase(invoiceRepository)
+        fetchInvoicesUseCase = FetchInvoicesUseCase(appRepository)
     }
 
     fun switchMode(apiMode: Boolean) {
-        invoiceRepository.invoiceDAO.deleteAllInvoices()
+        appRepository.invoiceDAO.deleteAllInvoices()
         useAPI = apiMode
         fetchInvoices()
     }

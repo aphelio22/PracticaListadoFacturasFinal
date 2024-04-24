@@ -44,17 +44,18 @@
     <string name="tvPassResetForgot">Restablece tu contraseña:</string>
     <string name="returnToLoginForgot">Volver a inicio de sesión</string>
     <string name="repeatPassSignUp">Repite la contraseña</string>
-    <string name="autoconsumeTitle_DetailsFragment">CAU (Código Autoconsumo)</string>
-    <string name="autoconsumeCode_DetailsFragment">ES0021000000001994LJ1FA000</string>
-    <string name="requestStateTite_DetailsFragment">Estado solicitud alta autoconsumidor</string>
-    <string name="requestStatePlot_DetailsFragment">No hemos recibido ninguna solicitud de autoconsumo</string>
-    <string name="autoconsumeTypeTitle_DetailsFragment">Tipo autoconsumo</string>
-    <string name="autoconsumeTypePlot_DetailsFragment">Con excedentes y compensación individual - Consumo</string>
-    <string name="overageCompensation_DetailsFragment">Compensación de excedentes</string>
-    <string name="overageCompensationPlot_DetailsFragment">Precio PVPC</string>
-    <string name="powerInstalation_DetailsFragment">5kWp</string>
+    <string name="cauTitle_EnergyThirdFragment">CAU (Código Autoconsumo)</string>
+    <string name="cauContent_EnergyThirdFragment">ES0021000000001994LJ1FA000</string>
+    <string name="requestStatus_EnergyThirdFragment">Estado solicitud alta autoconsumidor</string>
+    <string name="requestStatusContent_EnergyThirdFragment">No hemos recibido ninguna solicitud de autoconsumo</string>
+    <string name="selfConsumptionTitle_EnergyThirdFragment">Tipo autoconsumo</string>
+    <string name="selfConsumptionContent_EnergyThirdFragment">Con excedentes y compensación individual - Consumo</string>
+    <string name="surplusCompensationTitle_EnergyThridFragment">Compensación de excedentes</string>
+    <string name="surplusCompensationContent_EnergyThirdFragment">Precio PVPC</string>
+    <string name="installationPowerContent_EnergyThirdFragment">5kWp</string>
     <string name="webviewText">Desde una aplicación Android, se puede acceder páginas web, mediante el navegador externo o mediante Webviews.</string>
     <string name="open_external_web">Abrir navegador externo</string>
     <string name="openWebView_ActivityWebview">Abrir Webview</string>
     <string name="smart_solar_activity_energy">Smart Solar</string>
+    <string name="installationPowerTitle_EnergyThirdFragment">Potencia de instalación</string>
 </resources>

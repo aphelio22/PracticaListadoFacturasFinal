@@ -7,7 +7,7 @@ import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 
-class InvoiceRepository() {
+class AppRepository() {
     val invoiceDAO = InvoiceDatabase.getAppDBInstance().getInvoiceDao()
     val energyDao = InvoiceDatabase.getAppDBInstance().getEnergyDataDao()
     val api = InvoiceService()
@@ -34,6 +34,10 @@ class InvoiceRepository() {
 
     fun getAllInvoices(): List<InvoiceModelRoom> {
         return invoiceDAO.getAllInvoices()
+    }
+
+    fun getAllEnergyData(): EnergyDataModelRoom {
+        return energyDao.getAllEnergyData()
     }
 
     suspend fun fetchAndInsertInvoicesFromMock() {

@@ -43,7 +43,7 @@ class InvoiceService {
 
     suspend fun getDataEnergyFromMock(): EnergyDetail? {
         val response = retromockBuilder.create(EnergyDataRetroMock::class.java).getDataEnergyFromMock()
-        if (response.isSuccessful) {
+        if (response.isSuccessful && response.body() != null) {
             val energyData = response.body()
             return energyData
         } else{

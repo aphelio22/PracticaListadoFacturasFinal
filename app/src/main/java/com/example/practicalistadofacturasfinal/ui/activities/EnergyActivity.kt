@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivityEnergyBinding
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergyFirstFragment
@@ -18,6 +19,7 @@ class EnergyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        MyApplication()
         binding = ActivityEnergyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()

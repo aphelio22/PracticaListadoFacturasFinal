@@ -3,13 +3,12 @@ package com.example.practicalistadofacturasfinal.data.retrofit.network.response
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 
 data class EnergyDetail (
-    val cau: String,
-    val requestStatus: String,
-    val selfConsumptionType: String,
-    val surplusCompensation: String,
-    val IntsllationPower: String
+    val detail: Detail
 ) {
     fun asEnergyDataModelRoom(): EnergyDataModelRoom {
-        return EnergyDataModelRoom(cau, requestStatus, selfConsumptionType, surplusCompensation, IntsllationPower)
+        return EnergyDataModelRoom(detail.cau, detail.requestStatus, detail.selfConsumptionType, detail.surplusCompensation, detail.installationPower)
     }
 }
+
+
+
