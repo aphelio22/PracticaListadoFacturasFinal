@@ -27,7 +27,7 @@ private val _energyDataLiveData = MutableLiveData<EnergyDataModelRoom>()
     fun fetchEnergyData() {
         viewModelScope.launch {
             appRepository.fetchAndInsertEnergyDataFromMock()
-            _energyDataLiveData.postValue(appRepository.getAllEnergyData())
+            _energyDataLiveData.postValue(appRepository.getEnergyDataFromRoom())
         }
     }
 }

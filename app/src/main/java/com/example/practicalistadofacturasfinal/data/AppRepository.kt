@@ -11,32 +11,32 @@ class AppRepository() {
     val energyDao = InvoiceDatabase.getAppDBInstance().getEnergyDataDao()
     val api = InvoiceService()
 
-    suspend fun getDataFromAPI(): List<InvoiceResponse>? {
-        return api.getDataFromAPI()
+    suspend fun getInvoicesFromAPI(): List<InvoiceResponse>? {
+        return api.getInvoicesFromAPI()
     }
 
-    suspend fun getDataFromMock(): List<InvoiceResponse>? {
-        return api.getDataFromMock()
+    suspend fun getInvoicesFromRetroMock(): List<InvoiceResponse>? {
+        return api.getInvoicesFromRetroMock()
     }
 
-    suspend fun insertEnergyData(energyDataModelRoom: EnergyDataModelRoom) {
-        energyDao.insertInvoices(energyDataModelRoom)
+    suspend fun insertEnergyDataInRoom(energyDataModelRoom: EnergyDataModelRoom) {
+        energyDao.insertEnergyDataInRoom(energyDataModelRoom)
     }
 
-    suspend fun insertInvoices(invoices: List<InvoiceModelRoom>) {
-        invoiceDAO.insertInvoices(invoices)
+    suspend fun insertInvoicesInRoom(invoices: List<InvoiceModelRoom>) {
+        invoiceDAO.insertInvoicesInRoom(invoices)
     }
 
-    fun getAllInvoices(): List<InvoiceModelRoom> {
-        return invoiceDAO.getAllInvoices()
+    fun getAllInvoicesFromRoom(): List<InvoiceModelRoom> {
+        return invoiceDAO.getAllInvoicesFromRoom()
     }
 
-    fun getAllEnergyData(): EnergyDataModelRoom {
-        return energyDao.getAllEnergyData()
+    fun getEnergyDataFromRoom(): EnergyDataModelRoom {
+        return energyDao.getEnergyDataFromRoom()
     }
 
     suspend fun fetchAndInsertInvoicesFromMock() {
-        val invoicesFromMock = api.getDataFromMock() ?: emptyList()
+        val invoicesFromMock = getInvoicesFromRetroMock() ?: emptyList()
         val invoicesRoom = invoicesFromMock.map { invoice ->
             InvoiceModelRoom(
                 descEstado = invoice.descEstado,
@@ -44,11 +44,11 @@ class AppRepository() {
                 fecha = invoice.fecha
             )
         }
-        insertInvoices(invoicesRoom)
+        insertInvoicesInRoom(invoicesRoom)
     }
 
     suspend fun fetchAndInsertInvoicesFromAPI() {
-        val invoicesFromAPI = api.getDataFromAPI() ?: emptyList()
+        val invoicesFromAPI = getInvoicesFromAPI() ?: emptyList()
         val invoicesRoom = invoicesFromAPI.map { invoice ->
             InvoiceModelRoom(
                 descEstado = invoice.descEstado,
@@ -56,14 +56,14 @@ class AppRepository() {
                 fecha = invoice.fecha
             )
         }
-        insertInvoices(invoicesRoom)
+        insertInvoicesInRoom(invoicesRoom)
     }
 
     suspend fun fetchAndInsertEnergyDataFromMock() {
         val energyDetail = api.getDataEnergyFromMock()
         val energyDetailRoom = energyDetail?.asEnergyDataModelRoom()
         if (energyDetailRoom != null) {
-            insertEnergyData(energyDetailRoom)
+            insertEnergyDataInRoom(energyDetailRoom)
         }
     }
 }

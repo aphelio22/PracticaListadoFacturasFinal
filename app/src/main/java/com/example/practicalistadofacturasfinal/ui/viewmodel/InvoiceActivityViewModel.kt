@@ -14,7 +14,6 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
-import com.example.practicalistadofacturasfinal.domain.FetchInvoicesUseCase
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -25,7 +24,6 @@ import java.util.Locale
 
 class InvoiceActivityViewModel() : ViewModel() {
     private lateinit var appRepository: AppRepository
-    private lateinit var fetchInvoicesUseCase: FetchInvoicesUseCase
 
     private var invoices: List<InvoiceModelRoom> = emptyList()
 
@@ -45,20 +43,19 @@ class InvoiceActivityViewModel() : ViewModel() {
 
     init {
         initRepository()
-        initFetchUseCase()
         fetchInvoices()
     }
 
     fun fetchInvoices() {
         viewModelScope.launch {
-            _filteredInvoicesLiveData.postValue(appRepository.getAllInvoices())
+            _filteredInvoicesLiveData.postValue(appRepository.getAllInvoicesFromRoom())
             try {
                 if (isInternetAvailable()) {
                     when (useAPI) {
                         true -> appRepository.fetchAndInsertInvoicesFromAPI()
                         false -> appRepository.fetchAndInsertInvoicesFromMock()
                     }
-                    invoices = appRepository.getAllInvoices()
+                    invoices = appRepository.getAllInvoicesFromRoom()
                     _filteredInvoicesLiveData.postValue(invoices)
                     findMaxAmount()
                     //verifyFilters()
@@ -73,12 +70,8 @@ class InvoiceActivityViewModel() : ViewModel() {
         appRepository = AppRepository()
     }
 
-    fun initFetchUseCase() {
-        fetchInvoicesUseCase = FetchInvoicesUseCase(appRepository)
-    }
-
     fun switchMode(apiMode: Boolean) {
-        appRepository.invoiceDAO.deleteAllInvoices()
+        appRepository.invoiceDAO.deleteAllInvoicesFromRoom()
         useAPI = apiMode
         fetchInvoices()
     }

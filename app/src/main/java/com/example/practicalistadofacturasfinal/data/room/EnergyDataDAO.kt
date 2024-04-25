@@ -8,11 +8,11 @@ import androidx.room.Query
 @Dao
 interface EnergyDataDAO {
     @Query("SELECT * FROM energyData_table")
-    fun getAllEnergyData(): EnergyDataModelRoom
+    fun getEnergyDataFromRoom(): EnergyDataModelRoom
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertInvoices(energyDataModelRoom: EnergyDataModelRoom)
+    fun insertEnergyDataInRoom(energyDataModelRoom: EnergyDataModelRoom)
 
     @Query("DELETE FROM energyData_table")
-    fun deleteAllEnergyData()
+    fun deleteEnergyDataFromRoom()
 }

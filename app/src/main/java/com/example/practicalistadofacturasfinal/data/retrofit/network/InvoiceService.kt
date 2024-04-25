@@ -10,7 +10,7 @@ class InvoiceService {
     private val retrofitBuilder = RetrofitHelper.getRetrofit()
     private val retromockBuilder = RetroMockHelper.getRetromock(retrofitBuilder)
 
-    suspend fun getDataFromMock(): List<InvoiceResponse>? {
+    suspend fun getInvoicesFromRetroMock(): List<InvoiceResponse>? {
         val response = retromockBuilder.create(InvoiceClientRetroMock::class.java).getDataFromAPI()
         if (response.isSuccessful) {
             val invoices = response.body()?.facturas
@@ -25,7 +25,7 @@ class InvoiceService {
         }
     }
 
-    suspend fun getDataFromAPI(): List<InvoiceResponse>? {
+    suspend fun getInvoicesFromAPI(): List<InvoiceResponse>? {
             val response = retrofitBuilder.create(InvoiceClient::class.java).getDataFromAPI()
            if (response.isSuccessful) {
                val invoices = response.body()?.facturas
