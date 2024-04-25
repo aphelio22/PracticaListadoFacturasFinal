@@ -6,7 +6,7 @@ import com.example.practicalistadofacturasfinal.core.network.retromock.RetroMock
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.Detail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 
-class InvoiceService {
+class AppService {
     private val retrofitBuilder = RetrofitHelper.getRetrofit()
     private val retromockBuilder = RetroMockHelper.getRetromock(retrofitBuilder)
 
