@@ -1,6 +1,7 @@
 package com.example.practicalistadofacturasfinal.data
 
 import com.example.practicalistadofacturasfinal.data.retrofit.network.InvoiceService
+import com.example.practicalistadofacturasfinal.data.retrofit.network.response.Detail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
@@ -10,6 +11,10 @@ class AppRepository() {
     val invoiceDAO = InvoiceDatabase.getAppDBInstance().getInvoiceDao()
     val energyDao = InvoiceDatabase.getAppDBInstance().getEnergyDataDao()
     val api = InvoiceService()
+
+    suspend fun getEnergyDataFromRetromMock(): Detail? {
+        return api.getEnergyDataFromRetroMock()
+    }
 
     suspend fun getInvoicesFromAPI(): List<InvoiceResponse>? {
         return api.getInvoicesFromAPI()
@@ -60,7 +65,7 @@ class AppRepository() {
     }
 
     suspend fun fetchAndInsertEnergyDataFromMock() {
-        val energyDetail = api.getDataEnergyFromMock()
+        val energyDetail = getEnergyDataFromRetromMock()
         val energyDetailRoom = energyDetail?.asEnergyDataModelRoom()
         if (energyDetailRoom != null) {
             insertEnergyDataInRoom(energyDetailRoom)
