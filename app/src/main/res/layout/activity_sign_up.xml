@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/spacerToImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/emailHintLogin"
+        android:hint="@string/email_signUpActivity"
         />
 
     <EditText
@@ -46,7 +46,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/passHintLogin"
+        android:hint="@string/pass_SignUpActivity"
         />
 
     <EditText
@@ -57,7 +57,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/repeatPassSignUp"
+        android:hint="@string/repeatPass_signUpActivity"
         />
 
     <Space
@@ -72,7 +72,7 @@
         android:id="@+id/btLogin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/registerLogin"
+        android:text="@string/registerbuttonText_signUpActivity"
         app:layout_constraintTop_toBottomOf="@id/spacerToTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
         android:id="@+id/tvDivider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dividerTextLogin"
+        android:text="@string/divider_signUpActivity"
         app:layout_constraintTop_toBottomOf="@id/btLogin"
         app:layout_constraintStart_toEndOf="@id/startDivider"
         app:layout_constraintEnd_toStartOf="@id/endDivider"
@@ -111,7 +111,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.Button.OutlinedButton"
-        android:text="@string/returnToLoginForgot"
+        android:text="@string/buttonText_signUpActivity"
         app:strokeWidth="3dp"
         app:strokeColor="@color/seed"
         app:layout_constraintTop_toBottomOf="@id/tvDivider"

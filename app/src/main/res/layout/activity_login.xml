@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/spacerToImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/emailHintLogin"
+        android:hint="@string/email_loginActivity"
         />
 
     <EditText
@@ -46,14 +46,14 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/passHintLogin"
+        android:hint="@string/pass_loginActivity"
         />
 
     <CheckBox
         android:id="@+id/cbLoginRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rememberUserLogin"
+        android:text="@string/rememberUser_loginActivity"
         app:layout_constraintTop_toBottomOf="@id/etLoginPass"
         app:layout_constraintStart_toStartOf="parent"
         android:buttonTint="@color/seed"/>
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cbLoginRemember"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/forgetPassLogin"
+        android:text="@string/forgottenPass_loginActivity"
         android:textStyle=""
         />
 
@@ -88,7 +88,7 @@
         android:id="@+id/btLogin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/loginLogin"
+        android:text="@string/buttonLogin_loginActivity"
         app:layout_constraintTop_toBottomOf="@id/spacerToTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
         android:id="@+id/tvDivider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dividerTextLogin"
+        android:text="@string/divider_loginActivity"
         app:layout_constraintTop_toBottomOf="@id/btLogin"
         app:layout_constraintStart_toEndOf="@id/startDivider"
         app:layout_constraintEnd_toStartOf="@id/endDivider"
@@ -127,7 +127,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.Button.OutlinedButton"
-        android:text="@string/registerLogin"
+        android:text="@string/buttonRegister_loginActivity"
         app:strokeWidth="3dp"
         app:strokeColor="@color/seed"
         app:layout_constraintTop_toBottomOf="@id/tvDivider"
