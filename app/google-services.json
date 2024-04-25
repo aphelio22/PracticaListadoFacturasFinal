@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887924335536",
+    "project_id": "practicalistadofacturasfinal",
+    "storage_bucket": "practicalistadofacturasfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887924335536:android:6a647d9a4e0990925cec75",
+        "android_client_info": {
+          "package_name": "com.example.practicalistadofacturasfinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATOUV9yeGibBlOaSri1Lo-Ift9zZSDjeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
