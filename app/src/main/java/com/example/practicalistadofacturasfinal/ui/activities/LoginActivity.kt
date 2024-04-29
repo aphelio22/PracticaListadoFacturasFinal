@@ -23,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
+
         binding.btLogin.setOnClickListener {
             val email = binding.etEmailUser.text.toString()
             val password = binding.etLoginPass.text.toString()
@@ -39,6 +40,12 @@ class LoginActivity : AppCompatActivity() {
                     customPopupFragment.show(fragmentManager, "FragmentPopUp")
                 }
             )
+        }
+
+        binding.tvForgetPass.setOnClickListener {
+            val miIntent = Intent(this, ForgotPassActivity::class.java)
+            startActivity(miIntent)
+            finish()
         }
     }
 

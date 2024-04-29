@@ -1,5 +1,6 @@
 package com.example.practicalistadofacturasfinal.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,12 @@ class ForgotPassActivity : AppCompatActivity() {
         binding = ActivityForgotPassBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
+
+        binding.btReturnLogin.setOnClickListener {
+            val miIntent = Intent(this, LoginActivity::class.java)
+            startActivity(miIntent)
+            finish()
+        }
     }
 
     private fun setInsets() {

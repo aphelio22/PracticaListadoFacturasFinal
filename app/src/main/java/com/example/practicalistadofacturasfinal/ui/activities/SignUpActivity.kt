@@ -2,7 +2,6 @@ package com.example.practicalistadofacturasfinal.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -13,9 +12,6 @@ import com.example.listafacturaspractica.ui.view.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivitySignUpBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.SignUpActivityViewModel
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import kotlin.system.measureTimeMillis
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
