@@ -65,4 +65,5 @@
     <string name="buttonRegister_loginActivity">Registrarse</string>
     <string name="emailOrPassDoesNotMatch_FragmentPopUp">Email o contraseña incorrectos.</string>
     <string name="blankFields_FragmentPopUp">Existen campos vacíos.</string>
+    <string name="logout_SelectionActivityM">Logout</string>
 </resources>

@@ -15,13 +15,13 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivityMainBinding
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
-import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
+import com.example.practicalistadofacturasfinal.ui.viewmodel.SelectionActivityMViewModel
 
 class SelectionActivityM : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
-    private val viewModel: InvoiceActivityViewModel by viewModels()
+    private val selectionActivityMViewModel: SelectionActivityMViewModel by viewModels()
 
     companion object {
         fun create(context: Context): Intent {
@@ -37,6 +37,13 @@ class SelectionActivityM : AppCompatActivity() {
         setContentView(binding.root)
         setInsets()
         initRecyclerView()
+
+        binding.btLogOut.setOnClickListener {
+            selectionActivityMViewModel.logOut()
+            val miIntent = Intent(this, LoginActivity::class.java)
+            startActivity(miIntent)
+            finish()
+        }
 
     }
 

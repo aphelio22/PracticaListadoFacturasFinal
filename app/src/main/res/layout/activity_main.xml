@@ -28,7 +28,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:itemCount="2"
+        tools:itemCount="3"
         tools:listitem="@layout/item_practice_selection"/>
+
+    <Button
+        android:id="@+id/btLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tvPracticeSelectionTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="95dp"
+        android:text="@string/logout_SelectionActivityM"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
