@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.listafacturaspractica.ui.view.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.databinding.ActivitySignUpBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.SignUpActivityViewModel
@@ -44,8 +45,12 @@ class SignUpActivity : AppCompatActivity() {
                             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 )
-            } else {
+            } else if (password != confirmPassword && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            } else {
+                val fragmentManager = supportFragmentManager
+                val customPopupFragment = FragmentPopUp(getString(R.string.blankFields_FragmentPopUp))
+                customPopupFragment.show(fragmentManager, "FragmentPopUp")
             }
         }
 
