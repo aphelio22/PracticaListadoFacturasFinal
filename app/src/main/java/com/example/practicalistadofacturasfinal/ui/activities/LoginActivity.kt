@@ -1,22 +1,45 @@
 package com.example.practicalistadofacturasfinal.ui.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.example.listafacturaspractica.ui.view.FragmentPopUp
+import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.databinding.ActivityLoginBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.LoginActivityViewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginAvtivityViewModel: LoginActivityViewModel by viewModels()
+    private lateinit var prefs: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private var encryptedPrefs = createEncryptedPreferences(MyApplication.context)
+
+    private fun createEncryptedPreferences(context: Context): SharedPreferences {
+        val masterKeyAlias = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+        return encryptedPrefs ?: EncryptedSharedPreferences.create(
+            context,
+            Constants.PREFS_FILE_NAME,
+            masterKeyAlias,
+
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,28 +47,77 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         setInsets()
 
-        binding.btLogin.setOnClickListener {
-            val email = binding.etEmailUser.text.toString()
-            val password = binding.etLoginPass.text.toString()
+        prefs = getSharedPreferences("app", MODE_PRIVATE)
+        editor = prefs.edit()
 
-            loginAvtivityViewModel.login(email, password,
-                onSuccess = {
-                    val intent = Intent(this, SelectionActivityM::class.java)
-                    startActivity(intent)
-                    finish()
-                },
-                onError = { errorMessage ->
-                    val fragmentManager = supportFragmentManager
-                    val customPopupFragment = FragmentPopUp(getString(R.string.emailOrPassDoesNotMatch_FragmentPopUp))
-                    customPopupFragment.show(fragmentManager, "FragmentPopUp")
-                }
-            )
+        val logOut = intent.getBooleanExtra("logOut", false)
+
+        if (logOut) {
+            editor.clear()
+        } else {
+            setValuesIfExist()
+        }
+
+        val email = binding.etEmailUser.editText?.text.toString()
+        val password = binding.etLoginPass.editText?.text.toString()
+        if (loginAvtivityViewModel.isLoginInfoValid(email, password)) {
+            attemptLogin(email, password)
+        }
+
+        binding.btLogin.setOnClickListener {
+            val email = binding.etEmailUser.editText?.text.toString()
+            val password = binding.etLoginPass.editText?.text.toString()
+            attemptLogin(email, password)
         }
 
         binding.tvForgetPass.setOnClickListener {
             val miIntent = Intent(this, ForgotPassActivity::class.java)
             startActivity(miIntent)
             finish()
+        }
+    }
+
+    private fun attemptLogin(email: String, password: String) {
+        if (loginAvtivityViewModel.isLoginInfoValid(email, password)) {
+            loginAvtivityViewModel.login(email, password,
+                onSuccess = {
+                    val intent = Intent(this, SelectionActivityM::class.java)
+                    saveOnSharedPreferences(email, password)
+                    startActivity(intent)
+                    finish()
+                },
+                onError = {
+                    val fragmentManager = supportFragmentManager
+                    val customPopupFragment = FragmentPopUp(getString(R.string.emailOrPassDoesNotMatch_FragmentPopUp))
+                    customPopupFragment.show(fragmentManager, "FragmentPopUp")
+                }
+            )
+        } else {
+            Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+   private fun saveOnSharedPreferences(email: String, password: String) {
+        if (binding.cbLoginRemember.isChecked) {
+            editor.putString("email", email)
+            editor.putString("password", password)
+            editor.putBoolean("recordar", true)
+            editor.apply()
+        } else {
+            editor.clear()
+            editor.putBoolean("recordar", false)
+            editor.apply()
+        }
+    }
+
+    private fun setValuesIfExist() {
+        val email = prefs.getString("email", "")
+        val password = prefs.getString("password", "")
+        val remember = prefs.getBoolean("recordar", false)
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            binding.etLoginPass.editText?.setText(password)
+            binding.etEmailUser.editText?.setText(email)
+            binding.cbLoginRemember.isChecked = remember
         }
     }
 

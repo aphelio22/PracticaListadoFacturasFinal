@@ -51,5 +51,7 @@ class Constants {
          * para almacenar la información de los filtros seleccionados.
          * */
         const val FILTER_STATE: String = "FILTER_STATE"
+
+        const val PREFS_FILE_NAME = "secure_prefs"
     }
 }

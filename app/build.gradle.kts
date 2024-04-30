@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     implementation(libs.material)
+    implementation(libs.androidx.security.crypto)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.retromock)
