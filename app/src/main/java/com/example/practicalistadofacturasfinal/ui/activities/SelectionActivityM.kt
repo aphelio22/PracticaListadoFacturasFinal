@@ -40,7 +40,7 @@ class SelectionActivityM : AppCompatActivity() {
 
         binding.btLogOut.setOnClickListener {
             selectionActivityMViewModel.logOut()
-            var logOut = true
+            val logOut = true
             val miIntent = Intent(this, LoginActivity::class.java)
             miIntent.putExtra("logOut", logOut)
             startActivity(miIntent)

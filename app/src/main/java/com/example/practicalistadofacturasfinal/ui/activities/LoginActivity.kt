@@ -23,18 +23,16 @@ import com.example.practicalistadofacturasfinal.ui.viewmodel.LoginActivityViewMo
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginAvtivityViewModel: LoginActivityViewModel by viewModels()
-    private lateinit var prefs: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-    private var encryptedPrefs = createEncryptedPreferences(MyApplication.context)
+    private lateinit var encryptedPrefs: SharedPreferences
 
     private fun createEncryptedPreferences(context: Context): SharedPreferences {
         val masterKeyAlias = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
-        return encryptedPrefs ?: EncryptedSharedPreferences.create(
+        return EncryptedSharedPreferences.create(
             context,
             Constants.PREFS_FILE_NAME,
             masterKeyAlias,
-
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
@@ -47,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         setInsets()
 
-        prefs = getSharedPreferences("app", MODE_PRIVATE)
-        editor = prefs.edit()
+        encryptedPrefs = createEncryptedPreferences(MyApplication.context)
+        editor = encryptedPrefs.edit()
 
         val logOut = intent.getBooleanExtra("logOut", false)
 
@@ -111,9 +109,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setValuesIfExist() {
-        val email = prefs.getString("email", "")
-        val password = prefs.getString("password", "")
-        val remember = prefs.getBoolean("recordar", false)
+        val email = encryptedPrefs.getString("email", "")
+        val password = encryptedPrefs.getString("password", "")
+        val remember = encryptedPrefs.getBoolean("recordar", false)
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             binding.etLoginPass.editText?.setText(password)
             binding.etEmailUser.editText?.setText(email)
