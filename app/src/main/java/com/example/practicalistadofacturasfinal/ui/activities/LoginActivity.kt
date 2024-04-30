@@ -52,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (logOut) {
             editor.clear()
+            saveOnSharedPreferences("", "")
         } else {
             setValuesIfExist()
         }
