@@ -14,7 +14,7 @@ class SignUpActivityViewModel(): ViewModel() {
    private val signUpUseCase = SignUpUseCase()
     fun signUp(email: String, password: String, confirmPassword: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = signUpUseCase.signUp(email, password, confirmPassword)
+            val result = signUpUseCase.invoke(email, password, confirmPassword)
             result.fold(
                 onSuccess = {
                     onSuccess.invoke()

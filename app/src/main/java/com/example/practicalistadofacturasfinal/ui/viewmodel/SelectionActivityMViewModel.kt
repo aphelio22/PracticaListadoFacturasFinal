@@ -12,7 +12,7 @@ class SelectionActivityMViewModel: ViewModel() {
 
     fun logOut() {
         viewModelScope.launch(Dispatchers.IO) {
-            logOutUseCase.logOut()
+            logOutUseCase.invoke()
         }
     }
 }

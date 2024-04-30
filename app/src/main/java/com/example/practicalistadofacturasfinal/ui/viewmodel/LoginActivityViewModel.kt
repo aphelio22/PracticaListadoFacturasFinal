@@ -17,7 +17,7 @@ class LoginActivityViewModel: ViewModel() {
 
     fun login(email: String, password: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = loginUseCase.login(email, password)
+            val result = loginUseCase.invoke(email, password)
             result.fold(
                 onSuccess = {
                     onSuccess.invoke()

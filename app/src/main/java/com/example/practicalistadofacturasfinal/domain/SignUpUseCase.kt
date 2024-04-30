@@ -8,7 +8,7 @@ import kotlin.coroutines.suspendCoroutine
 class SignUpUseCase {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    suspend fun signUp(email: String, password: String, confirmPassword: String): Result<FirebaseUser?> {
+    suspend operator fun invoke(email: String, password: String, confirmPassword: String): Result<FirebaseUser?> {
         return suspendCoroutine { continuation ->
             if (password != confirmPassword) {
                 continuation.resume(Result.failure(Exception("Passwords do not match")))
@@ -25,5 +25,4 @@ class SignUpUseCase {
             }
         }
     }
-
 }

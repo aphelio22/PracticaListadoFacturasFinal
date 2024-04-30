@@ -9,7 +9,7 @@ import kotlin.coroutines.suspendCoroutine
 class LoginUseCase {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    suspend fun login(email: String?, password: String?): Result<FirebaseUser?> {
+    suspend operator fun invoke(email: String?, password: String?): Result<FirebaseUser?> {
         return suspendCoroutine { continuation ->
             if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
                 continuation.resume(Result.failure(Exception("El correo electrónico o la contraseña no pueden estar vacíos")))
