@@ -22,7 +22,7 @@ import com.example.practicalistadofacturasfinal.ui.viewmodel.LoginActivityViewMo
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val loginAvtivityViewModel: LoginActivityViewModel by viewModels()
+    private val loginActivityViewModel: LoginActivityViewModel by viewModels()
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var encryptedPrefs: SharedPreferences
 
@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
 
         val email = binding.etEmailUser.editText?.text.toString()
         val password = binding.etLoginPass.editText?.text.toString()
-        if (loginAvtivityViewModel.isLoginInfoValid(email, password)) {
+        if (loginActivityViewModel.isLoginInfoValid(email, password)) {
             attemptLogin(email, password)
         }
 
@@ -76,8 +76,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun attemptLogin(email: String, password: String) {
-        if (loginAvtivityViewModel.isLoginInfoValid(email, password)) {
-            loginAvtivityViewModel.login(email, password,
+        if (loginActivityViewModel.isLoginInfoValid(email, password)) {
+            loginActivityViewModel.login(email, password,
                 onSuccess = {
                     val intent = Intent(this, SelectionActivityM::class.java)
                     saveOnSharedPreferences(email, password)
