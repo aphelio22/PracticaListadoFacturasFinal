@@ -19,12 +19,19 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.databinding.ActivityLoginBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.LoginActivityViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.remoteconfig.remoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginActivityViewModel: LoginActivityViewModel by viewModels()
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var encryptedPrefs: SharedPreferences
+    private val remoteConfig = Firebase.remoteConfig
+    private val configSettings = remoteConfigSettings {
+        minimumFetchIntervalInSeconds = 3600
+    }
 
     private fun createEncryptedPreferences(context: Context): SharedPreferences {
         val masterKeyAlias = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -44,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
+        remoteConfig.setConfigSettingsAsync(configSettings)
 
         encryptedPrefs = createEncryptedPreferences(MyApplication.context)
         editor = encryptedPrefs.edit()
