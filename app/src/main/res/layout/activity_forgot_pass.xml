@@ -38,15 +38,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spacerToImageView"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmailReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@id/tvResetPass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/resetEmail_forgotPasswordActivity"
-        />
+        app:hintEnabled="false"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/resetEmail_forgotPasswordActivity"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvMessageForgot"

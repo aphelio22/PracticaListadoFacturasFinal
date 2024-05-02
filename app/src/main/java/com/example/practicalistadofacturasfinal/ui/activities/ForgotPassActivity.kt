@@ -24,7 +24,7 @@ class ForgotPassActivity : AppCompatActivity() {
         setInsets()
 
         binding.btResetPass.setOnClickListener {
-            val email = binding.etEmailReset.text.toString()
+            val email = binding.etEmailReset.editText.toString()
             if (forgotPassViewModel.isEmailValid(email)) {
                 forgotPassViewModel.resetPassword(email)
             }  else {
