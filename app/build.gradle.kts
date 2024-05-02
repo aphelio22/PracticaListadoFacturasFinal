@@ -55,6 +55,8 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     //noinspection KaptUsageInsteadOfKsp
+    implementation(libs.firebase.config)
+    implementation(libs.firebase.analytics)
     kapt(libs.androidx.room.compiler.v250)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.hilt.android)
