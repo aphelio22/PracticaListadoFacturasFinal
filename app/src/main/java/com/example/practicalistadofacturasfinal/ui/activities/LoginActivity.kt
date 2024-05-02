@@ -63,6 +63,21 @@ class LoginActivity : AppCompatActivity() {
             attemptLogin(email, password)
         }
 
+        loginActivityViewModel.loginResult.observe(this) { result ->
+            result?.let {
+                if (it.isSuccess) {
+                    val intent = Intent(this, SelectionActivityM::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    val fragmentManager = supportFragmentManager
+                    val customPopupFragment =
+                        FragmentPopUp(getString(R.string.emailOrPassDoesNotMatch_FragmentPopUp))
+                    customPopupFragment.show(fragmentManager, "FragmentPopUp")
+                }
+            }
+        }
+
         binding.btLogin.setOnClickListener {
             val email = binding.etEmailUser.editText?.text.toString()
             val password = binding.etLoginPass.editText?.text.toString()
@@ -78,25 +93,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun attemptLogin(email: String, password: String) {
         if (loginActivityViewModel.isLoginInfoValid(email, password)) {
-            loginActivityViewModel.login(email, password,
-                onSuccess = {
-                    val intent = Intent(this, SelectionActivityM::class.java)
-                    saveOnSharedPreferences(email, password)
-                    startActivity(intent)
-                    finish()
-                },
-                onError = {
-                    val fragmentManager = supportFragmentManager
-                    val customPopupFragment = FragmentPopUp(getString(R.string.emailOrPassDoesNotMatch_FragmentPopUp))
-                    customPopupFragment.show(fragmentManager, "FragmentPopUp")
-                }
-            )
+            loginActivityViewModel.login(email, password)
         } else {
             Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
         }
     }
 
-   private fun saveOnSharedPreferences(email: String, password: String) {
+    private fun saveOnSharedPreferences(email: String, password: String) {
         if (binding.cbLoginRemember.isChecked) {
             editor.putString("email", email)
             editor.putString("password", password)
