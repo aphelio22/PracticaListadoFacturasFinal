@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPassword"
-        app:hintEnabled="true"
+        app:hintEnabled="false"
         style="@style/Widget.Material3.TextInputLayout.FilledBox"
         >
         <com.google.android.material.textfield.TextInputEditText
