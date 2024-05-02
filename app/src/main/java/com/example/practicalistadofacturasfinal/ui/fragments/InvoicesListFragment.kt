@@ -54,6 +54,13 @@ class InvoicesListFragment : Fragment() {
 
     private fun InitViewModel() {
         viewModel.filteredInvoicesLiveData.observe(viewLifecycleOwner) { invoices ->
+
+            if (invoices.isEmpty()) {
+                binding.tvEmptyList.visibility = View.VISIBLE
+            } else {
+                binding.tvEmptyList.visibility = View.GONE
+            }
+
             InitRecyclerView(invoices)
             InitDecoration()
         }

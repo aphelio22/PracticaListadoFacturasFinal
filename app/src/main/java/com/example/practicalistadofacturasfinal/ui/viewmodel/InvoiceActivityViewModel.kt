@@ -190,7 +190,7 @@ class InvoiceActivityViewModel() : ViewModel() {
                 val invoiceState = invoice.descEstado
                 val isPaid = invoiceState == "Pagada"
                 val isCanceled = invoiceState == "Anuladas"
-                val isFixedPayment = invoiceState == "cuotaFija"
+                val isFixedPayment = invoiceState == "Cuota fija"
                 val isPendingPayment = invoiceState == "Pendiente de pago"
                 val isPaymentPlan = invoiceState == "planPago"
 
