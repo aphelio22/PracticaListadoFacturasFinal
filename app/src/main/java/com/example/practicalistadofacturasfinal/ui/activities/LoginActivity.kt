@@ -84,6 +84,12 @@ class LoginActivity : AppCompatActivity() {
             attemptLogin(email, password)
         }
 
+        binding.btRegister.setOnClickListener {
+            val miIntent = Intent(this, SignUpActivity::class.java)
+            startActivity(miIntent)
+            finish()
+        }
+
         binding.tvForgetPass.setOnClickListener {
             val miIntent = Intent(this, ForgotPassActivity::class.java)
             startActivity(miIntent)
