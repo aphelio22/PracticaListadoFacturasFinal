@@ -28,17 +28,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmailSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@id/spacerToImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:hintEnabled="false"
         android:hint="@string/email_signUpActivity"
-        />
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_signUpActivity"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPassSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,20 +55,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPassword"
-        android:hint="@string/pass_SignUpActivity"
-        />
+        app:hintEnabled="false"
+        app:endIconMode="password_toggle"
+        app:boxBackgroundColor="@android:color/transparent"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:hint="@string/pass_SignUpActivity"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRepeatPassSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:endIconMode="password_toggle"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@id/etPassSignUp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPassword"
-        android:hint="@string/repeatPass_signUpActivity"
-        />
+        app:hintEnabled="true"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/repeatPass_signUpActivity"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Space
         android:id="@+id/spacerToTextView"
