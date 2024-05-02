@@ -23,24 +23,29 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
         setInsets()
 
+        signUpActivityViewModel.signUpResult.observe(this) { result ->
+            result?.let {
+                if (it.isSuccess) {
+                    val miIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(miIntent)
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this,
+                        it.exceptionOrNull()?.localizedMessage ?: "Unknown error occurred",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
         binding.btRegister.setOnClickListener {
             val email = binding.etEmailSignUp.text.toString()
             val password = binding.etPassSignUp.text.toString()
             val confirmPassword = binding.etRepeatPassSignUp.text.toString()
 
             if (validateInputs(email, password, confirmPassword)) {
-                // Llamar al método de registro en el ViewModel
-                signUpActivityViewModel.signUp(email, password, confirmPassword,
-                    onSuccess = {
-                        val miIntent = Intent(this, LoginActivity::class.java)
-                        startActivity(miIntent)
-                        finish()
-                    },
-                    onError = { errorMessage ->
-                        // Por ejemplo:
-                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                    }
-                )
+                signUpActivityViewModel.signUp(email, password, confirmPassword)
             } else if (password != confirmPassword && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
             } else {
