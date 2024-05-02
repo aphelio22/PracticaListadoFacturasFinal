@@ -100,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
     private fun attemptLogin(email: String, password: String) {
         if (loginActivityViewModel.isLoginInfoValid(email, password)) {
             loginActivityViewModel.login(email, password)
+            saveOnSharedPreferences(email, password)
         } else {
             Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
         }
