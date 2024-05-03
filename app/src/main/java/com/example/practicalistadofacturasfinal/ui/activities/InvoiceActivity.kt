@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivityInvoiceBinding
 
 class InvoiceActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class InvoiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         MyApplication()
+        RemoteConfigManager().fetchAndActivateConfig()
         binding = ActivityInvoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()

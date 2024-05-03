@@ -11,10 +11,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.text.ParseException
@@ -24,6 +26,7 @@ import java.util.Locale
 
 class InvoiceActivityViewModel() : ViewModel() {
     private lateinit var appRepository: AppRepository
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
 
     private var invoices: List<InvoiceModelRoom> = emptyList()
 
@@ -39,14 +42,30 @@ class InvoiceActivityViewModel() : ViewModel() {
     val filterLiveData: LiveData<FilterVO>
         get() = _filterLiveData
 
+    private val _showRemoteConfig = MutableLiveData<Boolean>()
+    val showRemoteConfig: LiveData<Boolean>
+        get() = _showRemoteConfig
+
     private var useAPI = false
 
     init {
         initRepository()
         fetchInvoices()
+        fetchRemoteConfig()
     }
 
-    fun fetchInvoices() {
+    private fun fetchRemoteConfig() {
+        viewModelScope.launch {
+            while (true) {
+                delay(3000)// Espera 1 minuto antes de volver a verificar la configuración remota
+                remoteConfigManager.fetchAndActivateConfig()
+                val showSwitch = remoteConfigManager.getBooleanValue("showSwitch")
+                _showRemoteConfig.postValue(showSwitch)
+            }
+        }
+    }
+
+    private fun fetchInvoices() {
         viewModelScope.launch {
             _filteredInvoicesLiveData.postValue(appRepository.getAllInvoicesFromRoom())
             try {
@@ -66,7 +85,7 @@ class InvoiceActivityViewModel() : ViewModel() {
         }
     }
 
-    fun initRepository() {
+    private fun initRepository() {
         appRepository = AppRepository()
     }
 
@@ -90,7 +109,7 @@ class InvoiceActivityViewModel() : ViewModel() {
                 )
     }
 
-    fun findMaxAmount() {
+    private fun findMaxAmount() {
         var max = 0.0
 
         for (invoice in invoices) {

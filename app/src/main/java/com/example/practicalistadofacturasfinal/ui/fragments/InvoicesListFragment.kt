@@ -25,7 +25,6 @@ class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
     private lateinit var adapter: InvoiceAdapter
     private val viewModel: InvoiceActivityViewModel by activityViewModels()
-    private lateinit var remoteConfigManager: RemoteConfigManager
     private var maxAmount = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +37,6 @@ class InvoicesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentInvoicesListBinding.inflate(layoutInflater, container, false)
-        RemoteConfigManager().fetchAndActivateConfig()
         return binding.root
     }
 
@@ -60,9 +58,9 @@ class InvoicesListFragment : Fragment() {
     private fun InitViewModel() {
         viewModel.filteredInvoicesLiveData.observe(viewLifecycleOwner) { invoices ->
 
-            remoteConfigManager = RemoteConfigManager.getInstance()
-            val showRetroSwitch = remoteConfigManager.getBooleanValue("showSwitch")
-            binding.switchRetromock.visibility = if (showRetroSwitch) View.VISIBLE else View.GONE
+//            remoteConfigManager = RemoteConfigManager.getInstance()
+//            val showRetroSwitch = remoteConfigManager.getBooleanValue("showSwitch")
+//            binding.switchRetromock.visibility = if (showRetroSwitch) View.VISIBLE else View.GONE
 
             if (invoices.isEmpty()) {
                 binding.tvEmptyList.visibility = View.VISIBLE
@@ -76,6 +74,14 @@ class InvoicesListFragment : Fragment() {
         viewModel.filterLiveData.observe(viewLifecycleOwner) {filter ->
             if (filter != null) {
                viewModel.verifyFilters()
+            }
+        }
+
+        viewModel.showRemoteConfig.observe(viewLifecycleOwner) {showSwitch ->
+            if (showSwitch) {
+                binding.switchRetromock.visibility = View.VISIBLE
+            } else {
+                binding.switchRetromock.visibility = View.GONE
             }
         }
     }

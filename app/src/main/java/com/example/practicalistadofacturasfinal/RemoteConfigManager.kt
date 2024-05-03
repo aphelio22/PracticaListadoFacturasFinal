@@ -23,6 +23,7 @@ class RemoteConfigManager {
         remoteConfig.fetchAndActivate()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    //remoteConfig.getBoolean("showSwitch")
                     Log.d("ÉXITO", "Configuración remota activada")
                 } else {
                     // Error al activar la configuración remota
