@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.webkit.WebView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivityWebViewBinding
@@ -21,6 +23,7 @@ class WebViewActivity : AppCompatActivity() {
         showAppTheme()
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         enableEdgeToEdge()
+        setOnClickListener()
         setContentView(binding.root)
         setInsets()
 
@@ -33,6 +36,12 @@ class WebViewActivity : AppCompatActivity() {
         binding.btnExternalWeb.setOnClickListener {
             val miIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.iberdrola.es"))
             startActivity(miIntent)
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.materialToolBar.setNavigationOnClickListener {
+            startActivity(SelectionActivityM.create(this))
         }
     }
 
