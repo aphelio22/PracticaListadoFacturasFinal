@@ -34,7 +34,7 @@ class RemoteConfigManager {
     }
 
     fun getBooleanValue(key: String): Boolean {
-        Log.d("PATATA", remoteConfig.getBoolean(key).toString())
+        Log.d("INFO", remoteConfig.getBoolean(key).toString())
         return remoteConfig.getBoolean(key)
     }
 

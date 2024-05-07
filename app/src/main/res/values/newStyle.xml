@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MiTemaPersonalizado" parent="Theme.AppCompat.Light">
+    <style name="MiTemaPersonalizado" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Personaliza los atributos del tema aquí -->
         <item name="colorPrimary">@color/mi_color_primario</item>
         <item name="colorPrimaryDark">@color/mi_color_primario_oscuro</item>
