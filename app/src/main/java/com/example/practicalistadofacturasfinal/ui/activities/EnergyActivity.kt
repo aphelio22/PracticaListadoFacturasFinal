@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivityEnergyBinding
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergyFirstFragment
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergySecondFragment
@@ -16,10 +17,13 @@ import com.google.android.material.tabs.TabLayout
 
 class EnergyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnergyBinding
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         MyApplication()
+        remoteConfigManager.fetchAndActivateConfig()
+        showAppTheme()
         binding = ActivityEnergyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
@@ -65,6 +69,14 @@ class EnergyActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left + padding, systemBars.top + padding, systemBars.right + padding, systemBars.bottom + padding)
             insets
+        }
+    }
+
+    private fun showAppTheme() {
+        remoteConfigManager.fetchAndActivateConfig()
+        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        if (showTheme) {
+            setTheme(R.style.MiTemaPersonalizado)
         }
     }
 }

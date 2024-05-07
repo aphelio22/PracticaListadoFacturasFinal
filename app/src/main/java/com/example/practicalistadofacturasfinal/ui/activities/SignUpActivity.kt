@@ -10,15 +10,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.listafacturaspractica.ui.view.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivitySignUpBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.SignUpActivityViewModel
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private val signUpActivityViewModel: SignUpActivityViewModel by viewModels()
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        remoteConfigManager.fetchAndActivateConfig()
+        showAppTheme()
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
@@ -74,5 +78,13 @@ class SignUpActivity : AppCompatActivity() {
     private fun validateInputs(email: String, password: String, confirmPassword: String): Boolean {
         // Realizar validaciones aquí, por ejemplo:
         return email.isNotEmpty() && password.isNotEmpty() && password == confirmPassword
+    }
+
+    private fun showAppTheme() {
+        remoteConfigManager.fetchAndActivateConfig()
+        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        if (showTheme) {
+            setTheme(R.style.MiTemaPersonalizado)
+        }
     }
 }

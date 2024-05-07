@@ -10,15 +10,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivityForgotPassBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.ForgotPassViewModel
 
 class ForgotPassActivity : AppCompatActivity() {
     private lateinit var binding: ActivityForgotPassBinding
     private val forgotPassViewModel: ForgotPassViewModel by viewModels()
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        remoteConfigManager.fetchAndActivateConfig()
+        showAppTheme()
         binding = ActivityForgotPassBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
@@ -65,6 +69,14 @@ class ForgotPassActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left + padding, systemBars.top + padding, systemBars.right + padding, systemBars.bottom + padding)
             insets
+        }
+    }
+
+    private fun showAppTheme() {
+        remoteConfigManager.fetchAndActivateConfig()
+        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        if (showTheme) {
+            setTheme(R.style.MiTemaPersonalizado)
         }
     }
 }

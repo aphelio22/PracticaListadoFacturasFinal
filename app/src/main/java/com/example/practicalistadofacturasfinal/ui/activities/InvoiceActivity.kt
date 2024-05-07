@@ -13,12 +13,14 @@ import com.example.practicalistadofacturasfinal.databinding.ActivityInvoiceBindi
 
 class InvoiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInvoiceBinding
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         MyApplication()
-        RemoteConfigManager().fetchAndActivateConfig()
+        remoteConfigManager.fetchAndActivateConfig()
+        showAppTheme()
         binding = ActivityInvoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
@@ -31,6 +33,14 @@ class InvoiceActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left , systemBars.top , systemBars.right, + systemBars.bottom )
             insets
+        }
+    }
+
+    private fun showAppTheme() {
+        remoteConfigManager.fetchAndActivateConfig()
+        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        if (showTheme) {
+            setTheme(R.style.MiTemaPersonalizado)
         }
     }
 }

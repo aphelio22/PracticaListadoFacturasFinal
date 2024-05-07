@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicalistadofacturasfinal.R
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivityMainBinding
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
@@ -22,6 +23,7 @@ class SelectionActivityM : AppCompatActivity() {
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
     private val selectionActivityMViewModel: SelectionActivityMViewModel by viewModels()
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
 
     companion object {
         fun create(context: Context): Intent {
@@ -32,6 +34,8 @@ class SelectionActivityM : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        remoteConfigManager.fetchAndActivateConfig()
+        showAppTheme()
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -86,5 +90,13 @@ class SelectionActivityM : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun showAppTheme() {
+        remoteConfigManager.fetchAndActivateConfig()
+        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        if (showTheme) {
+            setTheme(R.style.MiTemaPersonalizado)
+        }
     }
 }

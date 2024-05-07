@@ -20,15 +20,13 @@ import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.databinding.ActivityLoginBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.LoginActivityViewModel
-import com.google.firebase.Firebase
-import com.google.firebase.remoteconfig.remoteConfig
-import com.google.firebase.remoteconfig.remoteConfigSettings
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginActivityViewModel: LoginActivityViewModel by viewModels()
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var encryptedPrefs: SharedPreferences
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
 
     private fun createEncryptedPreferences(context: Context): SharedPreferences {
         val masterKeyAlias = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -45,6 +43,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        remoteConfigManager.fetchAndActivateConfig()
+        showAppTheme()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
@@ -98,6 +98,14 @@ class LoginActivity : AppCompatActivity() {
             val miIntent = Intent(this, ForgotPassActivity::class.java)
             startActivity(miIntent)
             finish()
+        }
+    }
+
+    private fun showAppTheme() {
+        remoteConfigManager.fetchAndActivateConfig()
+        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        if (showTheme) {
+            setTheme(R.style.MiTemaPersonalizado)
         }
     }
 
