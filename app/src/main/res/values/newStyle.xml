@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MiTemaPersonalizado" parent="Theme.AppCompat.Light">
+        <!-- Personaliza los atributos del tema aquí -->
+        <item name="colorPrimary">@color/mi_color_primario</item>
+        <item name="colorPrimaryDark">@color/mi_color_primario_oscuro</item>
+        <item name="colorAccent">@color/mi_color_accento</item>
+        <!-- Otros atributos de estilo -->
+    </style>
+</resources>

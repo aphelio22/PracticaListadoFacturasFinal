@@ -77,4 +77,7 @@
     <color name="md_theme_dark_surfaceTint">#ACD463</color>
     <color name="md_theme_dark_outlineVariant">#45483D</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="mi_color_primario">#3F51B5</color>
+    <color name="mi_color_primario_oscuro">#303F9F</color>
+    <color name="mi_color_accento">#FF4081</color>
 </resources>

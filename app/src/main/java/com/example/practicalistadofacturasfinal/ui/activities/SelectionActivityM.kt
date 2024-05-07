@@ -38,6 +38,7 @@ class SelectionActivityM : AppCompatActivity() {
         setInsets()
         initRecyclerView()
 
+
         binding.btLogOut.setOnClickListener {
             selectionActivityMViewModel.logOut()
             val logOut = true

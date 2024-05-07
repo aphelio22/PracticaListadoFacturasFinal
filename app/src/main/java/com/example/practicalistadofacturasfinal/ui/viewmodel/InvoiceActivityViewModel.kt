@@ -57,7 +57,7 @@ class InvoiceActivityViewModel() : ViewModel() {
     private fun fetchRemoteConfig() {
         viewModelScope.launch {
             while (true) {
-                delay(3000)// Espera 1 minuto antes de volver a verificar la configuración remota
+                delay(3000)
                 remoteConfigManager.fetchAndActivateConfig()
                 val showSwitch = remoteConfigManager.getBooleanValue("showSwitch")
                 _showRemoteConfig.postValue(showSwitch)
