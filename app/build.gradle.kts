@@ -69,6 +69,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
     implementation(libs.material)
     implementation(libs.androidx.security.crypto)
     androidTestImplementation(libs.androidx.junit)

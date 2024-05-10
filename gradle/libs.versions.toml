@@ -13,6 +13,8 @@ lifecycleViewmodelKtx = "2.7.0"
 material = "1.11.0"
 activity = "1.8.2"
 constraintlayout = "2.1.4"
+mockitoCore = "2.19.0"
+mockitoKotlin = "5.2.1"
 navigationFragmentKtx = "2.7.7"
 retrofit = "2.9.0"
 retromock = "1.1.1"
@@ -46,6 +48,8 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retromock = { module = "co.infinum:retromock", version.ref = "retromock" }
 
