@@ -71,6 +71,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
+    testImplementation (libs.robolectric)
     implementation(libs.material)
     implementation(libs.androidx.security.crypto)
     androidTestImplementation(libs.androidx.junit)

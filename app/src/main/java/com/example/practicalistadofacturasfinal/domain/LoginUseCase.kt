@@ -6,9 +6,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class LoginUseCase {
-    private val firebaseAuth = FirebaseAuth.getInstance()
-
+class LoginUseCase(private val firebaseAuth: FirebaseAuth) {
     suspend operator fun invoke(email: String?, password: String?): Result<FirebaseUser?> {
         return suspendCoroutine { continuation ->
             if (email.isNullOrEmpty() || password.isNullOrEmpty()) {

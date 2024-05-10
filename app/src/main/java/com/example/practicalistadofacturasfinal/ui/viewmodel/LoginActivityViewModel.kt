@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.domain.LoginUseCase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class LoginActivityViewModel: ViewModel() {
 
-    private val loginUseCase = LoginUseCase()
+    private val loginUseCase = LoginUseCase(FirebaseAuth.getInstance())
 
     private val _loginResult = MutableLiveData<Result<FirebaseUser?>>()
     val loginResult: LiveData<Result<FirebaseUser?>>
