@@ -44,9 +44,9 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         binding.btRegister.setOnClickListener {
-            val email = binding.etEmailSignUp.editText.toString()
-            val password = binding.etPassSignUp.editText.toString()
-            val confirmPassword = binding.etRepeatPassSignUp.editText.toString()
+            val email = binding.etEmailSignUp.editText?.text.toString()
+            val password = binding.etPassSignUp.editText?.text.toString()
+            val confirmPassword = binding.etRepeatPassSignUp.editText?.text.toString()
 
             if (validateInputs(email, password, confirmPassword)) {
                 signUpActivityViewModel.signUp(email, password, confirmPassword)

@@ -5,8 +5,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class SignUpUseCase {
-    private val firebaseAuth = FirebaseAuth.getInstance()
+class SignUpUseCase (private val firebaseAuth: FirebaseAuth) {
 
     suspend operator fun invoke(email: String, password: String, confirmPassword: String): Result<FirebaseUser?> {
         return suspendCoroutine { continuation ->

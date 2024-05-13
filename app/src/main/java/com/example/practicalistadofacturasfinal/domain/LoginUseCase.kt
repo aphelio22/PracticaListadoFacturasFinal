@@ -18,10 +18,10 @@ class LoginUseCase(private val firebaseAuth: FirebaseAuth) {
                             val user = firebaseAuth.currentUser
                             continuation.resume(Result.success(user))
                         } else {
-                            Log.d(
-                                "LoginUseCase",
-                                "Error al iniciar sesión: ${task.exception?.message}"
-                            )
+//                            Log.d(
+//                                "LoginUseCase",
+//                                "Error al iniciar sesión: ${task.exception?.message}"
+//                            )
                             continuation.resume(
                                 Result.failure(
                                     task.exception
