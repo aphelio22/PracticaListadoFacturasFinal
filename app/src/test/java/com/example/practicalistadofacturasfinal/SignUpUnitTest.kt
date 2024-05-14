@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
@@ -47,7 +49,7 @@ class SignUpUnitTest {
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
         // Assert
-        Assert.assertEquals(firebaseUser, result.getOrNull())
+        assertEquals(firebaseUser, result.getOrNull())
     }
 
     @Test
@@ -67,8 +69,8 @@ class SignUpUnitTest {
 
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        Assert.assertTrue(result.isFailure)
-        Assert.assertTrue(result.exceptionOrNull()?.message == "Passwords do not match")
+        assertTrue(result.isFailure)
+        assertTrue(result.exceptionOrNull()?.message == "Passwords do not match")
     }
 
     @Test
@@ -76,7 +78,7 @@ class SignUpUnitTest {
         val email = "test@example.com"
         val password = "password"
         val confirmPassword = "password"
-        val task: Task<*> = mock(Task::class.java)
+        val task: Task<*>? = mock(Task::class.java)
 
         `when`(firebaseAuth.createUserWithEmailAndPassword(anyString(), anyString())).thenReturn(task as Task<AuthResult>)
         `when`(task.addOnCompleteListener(any())).thenAnswer { invocation ->
@@ -89,6 +91,7 @@ class SignUpUnitTest {
 
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-
+        assertTrue(result.isFailure)
+        assertEquals("Firebase error", result.exceptionOrNull()?.message)
     }
 }
