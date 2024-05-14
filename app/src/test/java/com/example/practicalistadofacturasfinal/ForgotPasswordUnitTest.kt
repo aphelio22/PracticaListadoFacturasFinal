@@ -11,6 +11,8 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.Mockito.doAnswer
+import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 
@@ -38,15 +40,16 @@ class ForgotPasswordUnitTest {
     @Test
     fun `forgot password with Firebase success should return success`() = runBlocking {
         val email = "test@example.com"
-        val task: Task<*>? = mock(Task::class.java)
+        val task: Task<Void> = mock(Task::class.java) as Task<Void>
 
-        `when`(firebaseAuth.sendPasswordResetEmail(anyString())).thenReturn(task as Task<Void>)
-        `when`(task.addOnCompleteListener(any())).thenAnswer { invocation ->
-            val listener = invocation.getArgument<OnCompleteListener<Void>>(0)
+        doAnswer { invocation ->
+            val listener = invocation.arguments[0] as OnCompleteListener<Void>
             listener.onComplete(task)
             task
-        }
-        `when`(task.isSuccessful).thenReturn(true)
+        }.`when`(task).addOnCompleteListener(any())
+
+        doReturn(task).`when`(firebaseAuth).sendPasswordResetEmail(anyString())
+        doReturn(true).`when`(task).isSuccessful
 
         val result = forgotPassUseCase.invoke(email)
 
@@ -56,16 +59,17 @@ class ForgotPasswordUnitTest {
     @Test
     fun `forgot password with Firebase failure should return failure`() = runBlocking {
         val email = "test@example.com"
-        val task: Task<*> = mock(Task::class.java)
+        val task: Task<Void> = mock(Task::class.java) as Task<Void>
 
-        `when`(firebaseAuth.sendPasswordResetEmail(anyString())).thenReturn(task as Task<Void>)
-        `when`(task.addOnCompleteListener(any())).thenAnswer { invocation ->
-            val listener = invocation.getArgument<OnCompleteListener<Void>>(0)
+        doAnswer { invocation ->
+            val listener = invocation.arguments[0] as OnCompleteListener<Void>
             listener.onComplete(task)
             task
-        }
-        `when`(task.isSuccessful).thenReturn(false)
-        `when`(task.exception).thenReturn(Exception("Firebase error"))
+        }.`when`(task).addOnCompleteListener(any())
+
+        doReturn(task).`when`(firebaseAuth).sendPasswordResetEmail(anyString())
+        doReturn(false).`when`(task).isSuccessful
+        doReturn(Exception("Firebase error")).`when`(task).exception
 
         val result = forgotPassUseCase.invoke(email)
 
@@ -74,20 +78,56 @@ class ForgotPasswordUnitTest {
     }
 
     @Test
-    fun `forgot password with invalid email should return success`() = runBlocking {
+    fun `forgot password with invalid email should return error`() = runBlocking {
         val email = "invalid-email"
-        val task: Task<*> = mock(Task::class.java)
-
-        `when`(firebaseAuth.sendPasswordResetEmail(anyString())).thenReturn(task as Task<Void>)
-        `when`(task.addOnCompleteListener(any())).thenAnswer { invocation ->
-            val listener = invocation.getArgument<OnCompleteListener<Void>>(0)
-            listener.onComplete(task)
-            task
-        }
-        `when`(task.isSuccessful).thenReturn(true)
 
         val result = forgotPassUseCase.invoke(email)
 
-        assertTrue(result.isSuccess)
+        assertTrue(result.isFailure)
+        assertEquals("El correo electrónico no es válido", result.exceptionOrNull()?.message)
+    }
+
+    @Test
+    fun `forgot password with Firebase network exception should return failure`() = runBlocking {
+        val email = "test@example.com"
+        val task: Task<Void> = mock(Task::class.java) as Task<Void>
+        val networkException = Exception("Network error")
+
+        doAnswer { invocation ->
+            val listener = invocation.arguments[0] as OnCompleteListener<Void>
+            listener.onComplete(task)
+            task
+        }.`when`(task).addOnCompleteListener(any())
+
+        doReturn(task).`when`(firebaseAuth).sendPasswordResetEmail(anyString())
+        doReturn(false).`when`(task).isSuccessful
+        doReturn(networkException).`when`(task).exception
+
+        val result = forgotPassUseCase.invoke(email)
+
+        assertTrue(result.isFailure)
+        assertEquals("Network error", result.exceptionOrNull()?.message)
+    }
+
+    @Test
+    fun `forgot password with rate limit exceeded should return failure`() = runBlocking {
+        val email = "test@example.com"
+        val task: Task<Void> = mock(Task::class.java) as Task<Void>
+        val rateLimitException = Exception("Rate limit exceeded")
+
+        doAnswer { invocation ->
+            val listener = invocation.arguments[0] as OnCompleteListener<Void>
+            listener.onComplete(task)
+            task
+        }.`when`(task).addOnCompleteListener(any())
+
+        doReturn(task).`when`(firebaseAuth).sendPasswordResetEmail(anyString())
+        doReturn(false).`when`(task).isSuccessful
+        doReturn(rateLimitException).`when`(task).exception
+
+        val result = forgotPassUseCase.invoke(email)
+
+        assertTrue(result.isFailure)
+        assertEquals("Rate limit exceeded", result.exceptionOrNull()?.message)
     }
 }

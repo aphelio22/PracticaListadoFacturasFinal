@@ -11,7 +11,7 @@ class ForgotPassUseCase(private val firebaseAuth: FirebaseAuth) {
         return suspendCoroutine { continuation ->
             if (email.isEmpty()) {
                 continuation.resume(Result.failure(Exception("El correo electrónico no puede estar vacío")))
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            } else if (!isValidEmail(email)) {
                 continuation.resume(Result.failure(Exception("El correo electrónico no es válido")))
             } else {
                 firebaseAuth.sendPasswordResetEmail(email)
@@ -24,5 +24,10 @@ class ForgotPassUseCase(private val firebaseAuth: FirebaseAuth) {
                     }
             }
         }
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
+        return email.matches(emailRegex)
     }
 }
