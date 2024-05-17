@@ -25,8 +25,8 @@ import java.util.Date
 import java.util.Locale
 
 class InvoiceActivityViewModel() : ViewModel() {
-    private lateinit var appRepository: AppRepository
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    lateinit var appRepository: AppRepository
+    var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
 
     private var invoices: List<InvoiceModelRoom> = emptyList()
 
@@ -85,7 +85,7 @@ class InvoiceActivityViewModel() : ViewModel() {
         }
     }
 
-    private fun initRepository() {
+    fun initRepository() {
         appRepository = AppRepository()
     }
 

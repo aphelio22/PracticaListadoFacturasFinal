@@ -9,7 +9,7 @@ import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import kotlinx.coroutines.launch
 
 class EnergyActivityViewModel: ViewModel() {
-private lateinit var appRepository: AppRepository
+lateinit var appRepository: AppRepository
 
 private val _energyDataLiveData = MutableLiveData<EnergyDataModelRoom>()
     val energyDataLiveData: LiveData<EnergyDataModelRoom>
