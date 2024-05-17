@@ -1,6 +1,5 @@
 package com.example.practicalistadofacturasfinal.ui.viewmodel
 
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.domain.LogOutUseCase

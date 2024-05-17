@@ -6,18 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.listafacturaspractica.ui.view.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
-import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
 import com.example.practicalistadofacturasfinal.ui.activities.SelectionActivityM
-import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 
@@ -25,12 +21,6 @@ class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
     private lateinit var adapter: InvoiceAdapter
     private val viewModel: InvoiceActivityViewModel by activityViewModels()
-    private var maxAmount = 0.0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +32,8 @@ class InvoicesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setOnClickListener()
-        InitViewModel()
+        initViewModel()
 
-        //viewModel.getInvoices()
         binding.switchRetromock.setOnClickListener {
             if (binding.switchRetromock.isChecked) {
                 viewModel.switchMode(true)
@@ -55,22 +44,18 @@ class InvoicesListFragment : Fragment() {
 
     }
 
-    private fun InitViewModel() {
+    private fun initViewModel() {
         viewModel.filteredInvoicesLiveData.observe(viewLifecycleOwner) { invoices ->
-
-//            remoteConfigManager = RemoteConfigManager.getInstance()
-//            val showRetroSwitch = remoteConfigManager.getBooleanValue("showSwitch")
-//            binding.switchRetromock.visibility = if (showRetroSwitch) View.VISIBLE else View.GONE
-
             if (invoices.isEmpty()) {
                 binding.tvEmptyList.visibility = View.VISIBLE
             } else {
                 binding.tvEmptyList.visibility = View.GONE
             }
 
-            InitRecyclerView(invoices)
-            InitDecoration()
+            initRecyclerView(invoices)
+            initDecoration()
         }
+
         viewModel.filterLiveData.observe(viewLifecycleOwner) {filter ->
             if (filter != null) {
                viewModel.verifyFilters()
@@ -86,20 +71,20 @@ class InvoicesListFragment : Fragment() {
         }
     }
 
-    private fun InitDecoration() {
+    private fun initDecoration() {
         val decoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
         binding.rvInvoices.addItemDecoration(decoration)
     }
 
-    private fun InitRecyclerView(invoices: List<InvoiceModelRoom>) {
+    private fun initRecyclerView(invoices: List<InvoiceModelRoom>) {
         binding.rvInvoices.layoutManager = LinearLayoutManager(context)
-        adapter = InvoiceAdapter(invoices) { inv ->
-            onItemSelected(inv)
+        adapter = InvoiceAdapter(invoices) {
+            onItemSelected()
         }
         binding.rvInvoices.adapter = adapter
     }
 
-    private fun onItemSelected(practice: InvoiceModelRoom) {
+    private fun onItemSelected() {
         val fragmentManager = requireActivity().supportFragmentManager
         val customPopupFragment = FragmentPopUp(getString(R.string.notImplementedYet))
         customPopupFragment.show(fragmentManager, "FragmentPopUp")
@@ -107,7 +92,7 @@ class InvoicesListFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.materialToolBar.setNavigationOnClickListener {
-            startActivity(SelectionActivityM.Companion.create(requireContext()))
+            startActivity(SelectionActivityM.create(requireContext()))
         }
 
         binding.materialToolBar.setOnMenuItemClickListener {

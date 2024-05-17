@@ -7,28 +7,28 @@ import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 
-class AppRepository() {
+class AppRepository {
     val invoiceDAO = InvoiceDatabase.getAppDBInstance().getInvoiceDao()
-    val energyDao = InvoiceDatabase.getAppDBInstance().getEnergyDataDao()
-    val api = AppService()
+    private val energyDao = InvoiceDatabase.getAppDBInstance().getEnergyDataDao()
+    private val api = AppService()
 
-    suspend fun getEnergyDataFromRetromMock(): Detail? {
+    private suspend fun getEnergyDataFromRetromMock(): Detail? {
         return api.getEnergyDataFromRetroMock()
     }
 
-    suspend fun getInvoicesFromAPI(): List<InvoiceResponse>? {
+    private suspend fun getInvoicesFromAPI(): List<InvoiceResponse>? {
         return api.getInvoicesFromAPI()
     }
 
-    suspend fun getInvoicesFromRetroMock(): List<InvoiceResponse>? {
+    private suspend fun getInvoicesFromRetroMock(): List<InvoiceResponse>? {
         return api.getInvoicesFromRetroMock()
     }
 
-    suspend fun insertEnergyDataInRoom(energyDataModelRoom: EnergyDataModelRoom) {
+    private fun insertEnergyDataInRoom(energyDataModelRoom: EnergyDataModelRoom) {
         energyDao.insertEnergyDataInRoom(energyDataModelRoom)
     }
 
-    suspend fun insertInvoicesInRoom(invoices: List<InvoiceModelRoom>) {
+    private fun insertInvoicesInRoom(invoices: List<InvoiceModelRoom>) {
         invoiceDAO.insertInvoicesInRoom(invoices)
     }
 

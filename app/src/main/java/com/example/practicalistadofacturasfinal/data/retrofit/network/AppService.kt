@@ -14,10 +14,10 @@ class AppService {
         val response = retromockBuilder.create(InvoiceClientRetroMock::class.java).getDataFromAPI()
         if (response.isSuccessful) {
             val invoices = response.body()?.facturas
-            if (invoices.isNullOrEmpty()) {
-                return emptyList()
+            return if (invoices.isNullOrEmpty()) {
+                emptyList()
             } else {
-                return invoices
+                invoices
             }
         } else {
             Log.d("Failure", response.toString())
@@ -29,10 +29,10 @@ class AppService {
             val response = retrofitBuilder.create(InvoiceClient::class.java).getDataFromAPI()
            if (response.isSuccessful) {
                val invoices = response.body()?.facturas
-               if (invoices.isNullOrEmpty()) {
-                   return emptyList()
+               return if (invoices.isNullOrEmpty()) {
+                   emptyList()
                } else {
-                   return invoices
+                   invoices
                }
            } else {
                Log.d("Failure", response.toString())

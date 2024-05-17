@@ -24,9 +24,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class InvoiceActivityViewModel() : ViewModel() {
+class InvoiceActivityViewModel : ViewModel() {
     lateinit var appRepository: AppRepository
-    var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
 
     private var invoices: List<InvoiceModelRoom> = emptyList()
 
@@ -35,7 +35,7 @@ class InvoiceActivityViewModel() : ViewModel() {
         get() = _filteredInvoicesLiveData
 
     private var _maxAmount: Float = 0.0f
-    var maxAmount = 0.0f
+    val maxAmount
         get() = _maxAmount
 
     private var _filterLiveData = MutableLiveData<FilterVO>()
@@ -191,7 +191,7 @@ class InvoiceActivityViewModel() : ViewModel() {
     private fun verifyCheckBox(
         filteredInvoices: List<InvoiceModelRoom>?
     ): List<InvoiceModelRoom> {
-        var filteredInvoicesCheckBox = ArrayList<InvoiceModelRoom>()
+        val filteredInvoicesCheckBox = ArrayList<InvoiceModelRoom>()
         val status = filterLiveData.value?.status
         //Se obtienen los estados de las CheckBoxes.
         val checkBoxPaid = status?.get(Constants.PAID_STRING) ?: false
@@ -225,11 +225,11 @@ class InvoiceActivityViewModel() : ViewModel() {
     }
 
     private fun verifyBalanceBar(filteredList: List<InvoiceModelRoom>): List<InvoiceModelRoom> {
-    var filteredInvoicesBalanceBar = ArrayList<InvoiceModelRoom>()
+    val filteredInvoicesBalanceBar = ArrayList<InvoiceModelRoom>()
         val maxValueSlider = filterLiveData.value?.maxValueSlider
         for (factura in filteredList) {
             //Se añade la factura a la lista filtrada si su importe es menor que el valor seleccionado.
-            if (factura.importeOrdenacion!! < maxValueSlider!!) {
+            if (factura.importeOrdenacion < maxValueSlider!!) {
                 filteredInvoicesBalanceBar.add(factura)
             }
         }

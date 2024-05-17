@@ -53,7 +53,7 @@ class EnergyActivity : AppCompatActivity() {
 
     private fun setOnClickListener() {
         binding.materialToolBar.setNavigationOnClickListener {
-            startActivity(SelectionActivityM.Companion.create(this))
+            startActivity(SelectionActivityM.create(this))
         }
     }
 

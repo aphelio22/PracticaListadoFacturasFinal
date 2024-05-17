@@ -3,11 +3,8 @@ package com.example.practicalistadofacturasfinal.ui.model.adapter
 import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.ItemFacturasBinding
-import com.example.practicalistadofacturasfinal.databinding.ItemPracticeSelectionBinding
-import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -18,7 +15,7 @@ class InvoiceViewHolder(view: View): RecyclerView.ViewHolder(view) {
     fun render (item: InvoiceModelRoom, onClickListener: (InvoiceModelRoom) -> Unit) {
         binding.itemEstado.text = item.descEstado
         binding.itemImporte.text = item.importeOrdenacion.toString()
-        binding.itemTvSelection.text = item.fecha?.let { formatDate(it) }.toString()
+        binding.itemTvSelection.text = formatDate(item.fecha)
 
         itemView.setOnClickListener {
             onClickListener(item)
@@ -37,7 +34,7 @@ class InvoiceViewHolder(view: View): RecyclerView.ViewHolder(view) {
             }
         }
     }
-    fun formatDate(date: String): String {
+    private fun formatDate(date: String): String {
         return try {
             val insert = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val format = insert.parse(date)

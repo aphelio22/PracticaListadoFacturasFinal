@@ -1,7 +1,6 @@
 package com.example.practicalistadofacturasfinal.data.retrofit.network
 
 import co.infinum.retromock.meta.Mock
-import co.infinum.retromock.meta.MockBehavior
 import co.infinum.retromock.meta.MockCircular
 import co.infinum.retromock.meta.MockResponse
 import co.infinum.retromock.meta.MockResponses

@@ -1,6 +1,5 @@
 package com.example.practicalistadofacturasfinal.domain
 
-import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine

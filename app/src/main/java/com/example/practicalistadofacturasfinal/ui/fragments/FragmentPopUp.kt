@@ -1,4 +1,4 @@
-package com.example.listafacturaspractica.ui.view
+package com.example.practicalistadofacturasfinal.ui.fragments
 
 import android.app.AlertDialog
 import android.app.Dialog

@@ -11,14 +11,11 @@ import android.widget.CheckBox
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.core.network.toDateString
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesFiltersBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.gson.Gson
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -34,14 +31,11 @@ class InvoicesFiltersFragment : Fragment() {
     private lateinit var fixedPayment: CheckBox
     private lateinit var pendingPayment: CheckBox
     private lateinit var paymentPlan: CheckBox
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentInvoicesFiltersBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -138,7 +132,7 @@ class InvoicesFiltersFragment : Fragment() {
             val datePickerDialog = context?.let { it1 ->
                 DatePickerDialog(
                     it1,
-                    { view, year1, monthOfYear, dayOfMonth ->
+                    { _, year1, monthOfYear, dayOfMonth ->
                         binding.btMinDate.text = "$dayOfMonth/${monthOfYear + 1}/$year1"
                     },
                     year,
@@ -170,7 +164,7 @@ class InvoicesFiltersFragment : Fragment() {
             val datePickerDialog = context?.let { it1 ->
                 DatePickerDialog(
                     it1,
-                    { view, year1, monthOfYear, dayOfMonth ->
+                    { _, year1, monthOfYear, dayOfMonth ->
                         binding.btMaxDate.text = "$dayOfMonth/${monthOfYear + 1}/$year1"
                     },
                     year,

@@ -1,7 +1,6 @@
 package com.example.practicalistadofacturasfinal.ui.activities
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -28,7 +27,7 @@ class InvoiceActivity : AppCompatActivity() {
     }
 
     private fun setInsets() {
-        val padding = resources.getDimension(R.dimen.activities_fragments_padding).toInt()
+        resources.getDimension(R.dimen.activities_fragments_padding).toInt()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left , systemBars.top , systemBars.right, + systemBars.bottom )
