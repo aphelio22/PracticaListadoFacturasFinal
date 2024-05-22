@@ -18,15 +18,25 @@ import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.constants.Constants
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivityLoginBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.LoginActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginActivityViewModel: LoginActivityViewModel by viewModels()
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var encryptedPrefs: SharedPreferences
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+
+    @Inject
+    lateinit var appRepository: AppRepository
+
+    @Inject
+    lateinit var appContext: Context
 
     private fun createEncryptedPreferences(context: Context): SharedPreferences {
         val masterKeyAlias = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -43,13 +53,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
 
-        encryptedPrefs = createEncryptedPreferences(MyApplication.context)
+        encryptedPrefs = createEncryptedPreferences(appContext)
         editor = encryptedPrefs.edit()
 
         val logOut = intent.getBooleanExtra("logOut", false)
@@ -102,8 +112,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showAppTheme() {
-        remoteConfigManager.fetchAndActivateConfig()
-        val showTheme = remoteConfigManager.getBooleanValue("showTheme")
+        appRepository.fetchAndActivateConfig()
+        val showTheme = appRepository.getBooleanValue("showTheme")
         if (showTheme) {
             setTheme(R.style.MiTemaPersonalizado)
         }

@@ -14,7 +14,9 @@ import com.example.practicalistadofacturasfinal.ui.fragments.EnergyFirstFragment
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergySecondFragment
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergyThirdFragment
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EnergyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnergyBinding
     private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()

@@ -16,6 +16,7 @@ import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesList
 import com.example.practicalistadofacturasfinal.ui.activities.SelectionActivityM
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding

@@ -9,7 +9,9 @@ import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.databinding.ActivityInvoiceBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InvoiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInvoiceBinding
     private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()

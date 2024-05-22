@@ -5,14 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.data.AppRepository
+import com.example.practicalistadofacturasfinal.data.retrofit.network.AppService
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import javax.inject.Inject
 
-class EnergyActivityViewModel : ViewModel(), KoinComponent {
-
-    private val appRepository: AppRepository by inject()
+@HiltViewModel
+class EnergyActivityViewModel @Inject constructor(private val appRepository: AppRepository) : ViewModel() {
 
 private val _energyDataLiveData = MutableLiveData<EnergyDataModelRoom>()
     val energyDataLiveData: LiveData<EnergyDataModelRoom>
@@ -23,7 +26,7 @@ private val _energyDataLiveData = MutableLiveData<EnergyDataModelRoom>()
     }
 
     fun fetchEnergyData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             appRepository.fetchAndInsertEnergyDataFromMock()
             _energyDataLiveData.postValue(appRepository.getEnergyDataFromRoom())
         }

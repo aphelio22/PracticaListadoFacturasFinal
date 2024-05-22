@@ -2,25 +2,7 @@ package com.example.practicalistadofacturasfinal
 
 import android.app.Application
 import android.content.Context
-import com.example.practicalistadofacturasfinal.di.appModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import dagger.hilt.android.HiltAndroidApp
 
-class MyApplication: Application() {
-
-        override fun onCreate() {
-            super.onCreate()
-            context = applicationContext
-
-            startKoin {
-                androidLogger()
-                androidContext(this@MyApplication)
-                modules(appModule)
-            }
-    }
-
-    companion object {
-        lateinit var context: Context
-    }
-}
+@HiltAndroidApp
+class MyApplication: Application()

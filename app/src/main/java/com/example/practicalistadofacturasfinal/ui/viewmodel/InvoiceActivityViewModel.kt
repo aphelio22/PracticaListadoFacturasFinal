@@ -14,8 +14,11 @@ import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.data.AppRepository
+import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -23,10 +26,10 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
-class InvoiceActivityViewModel : ViewModel() {
-    lateinit var appRepository: AppRepository
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+@HiltViewModel
+class InvoiceActivityViewModel @Inject constructor(private val appRepository: AppRepository, private val appContext: Context) : ViewModel() {
 
     private var invoices: List<InvoiceModelRoom> = emptyList()
 
@@ -49,30 +52,35 @@ class InvoiceActivityViewModel : ViewModel() {
     private var useAPI = false
 
     init {
-        initRepository()
         fetchInvoices()
         fetchRemoteConfig()
     }
 
     private fun fetchRemoteConfig() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             while (true) {
                 delay(3000)
-                remoteConfigManager.fetchAndActivateConfig()
-                val showSwitch = remoteConfigManager.getBooleanValue("showSwitch")
+                appRepository.fetchAndActivateConfig()
+                val showSwitch = appRepository.getBooleanValue("showSwitch")
                 _showRemoteConfig.postValue(showSwitch)
             }
         }
     }
 
     private fun fetchInvoices() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _filteredInvoicesLiveData.postValue(appRepository.getAllInvoicesFromRoom())
             try {
                 if (isInternetAvailable()) {
                     when (useAPI) {
-                        true -> appRepository.fetchAndInsertInvoicesFromAPI()
-                        false -> appRepository.fetchAndInsertInvoicesFromMock()
+                        true -> {
+                            appRepository.deleteAllInvoicesFromRoom()
+                            appRepository.fetchAndInsertInvoicesFromAPI()
+                            }
+                        false ->{
+                            appRepository.deleteAllInvoicesFromRoom()
+                            appRepository.fetchAndInsertInvoicesFromMock()
+                        }
                     }
                     invoices = appRepository.getAllInvoicesFromRoom()
                     _filteredInvoicesLiveData.postValue(invoices)
@@ -85,19 +93,14 @@ class InvoiceActivityViewModel : ViewModel() {
         }
     }
 
-    fun initRepository() {
-        appRepository = AppRepository()
-    }
-
     fun switchMode(apiMode: Boolean) {
-        appRepository.invoiceDAO.deleteAllInvoicesFromRoom()
         useAPI = apiMode
         fetchInvoices()
     }
 
     private fun isInternetAvailable(): Boolean {
         val connectivityManager =
-            MyApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         val network = connectivityManager.activeNetwork
         val capabilities = connectivityManager.getNetworkCapabilities(network)
@@ -128,13 +131,13 @@ class InvoiceActivityViewModel : ViewModel() {
         status: HashMap<String, Boolean>
     ) {
         if ((minDate == getString(
-                MyApplication.context,
+                appContext,
                 R.string.dayMonthYear
-            ) && maxDate == getString(MyApplication.context, R.string.dayMonthYear)) ||
+            ) && maxDate == getString(appContext, R.string.dayMonthYear)) ||
             (minDate != getString(
-                MyApplication.context,
+                appContext,
                 R.string.dayMonthYear
-            ) && maxDate != getString(MyApplication.context, R.string.dayMonthYear))
+            ) && maxDate != getString(appContext, R.string.dayMonthYear))
         ) {
             val filter = FilterVO(maxDate, minDate, maxValueSlider, status)
             _filterLiveData.postValue(filter)
@@ -155,9 +158,9 @@ class InvoiceActivityViewModel : ViewModel() {
         val minDate = filterLiveData.value?.minDate
         val filteredList = ArrayList<InvoiceModelRoom>()
         if (minDate != getString(
-                MyApplication.context,
+                appContext,
                 R.string.dayMonthYear
-            ) && maxDate != getString(MyApplication.context, R.string.dayMonthYear)
+            ) && maxDate != getString(appContext, R.string.dayMonthYear)
         ) {
             val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
