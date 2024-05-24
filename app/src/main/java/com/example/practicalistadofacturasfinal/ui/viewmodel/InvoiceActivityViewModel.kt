@@ -130,16 +130,11 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
         maxDate: String,
         minDate: String,
         maxValueSlider: Double,
-        status: HashMap<String, Boolean>
+        status: HashMap<String, Boolean>,
+        dateStringResource: String
     ) {
-        if ((minDate == getString(
-                appContext,
-                R.string.dayMonthYear
-            ) && maxDate == getString(appContext, R.string.dayMonthYear)) ||
-            (minDate != getString(
-                appContext,
-                R.string.dayMonthYear
-            ) && maxDate != getString(appContext, R.string.dayMonthYear))
+        if ((minDate == dateStringResource && maxDate == dateStringResource) ||
+            (minDate != dateStringResource && maxDate != dateStringResource)
         ) {
             val filter = FilterVO(maxDate, minDate, maxValueSlider, status)
             _filterLiveData.postValue(filter)

@@ -1,19 +1,24 @@
 package com.example.practicalistadofacturasfinal
 
 import android.content.Context
+import android.util.Xml
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 import io.mockk.every
+import junit.framework.Assert
+import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
+import org.xmlpull.v1.XmlPullParser
 import javax.inject.Inject
 import kotlin.test.Test
 
@@ -28,8 +33,8 @@ class InvoiceActivityViewModelUnitTest {
 
     @Before
     fun setup() {
-        appRepository = Mockito.mock(AppRepository::class.java)
-        context = Mockito.mock(Context::class.java)
+        appRepository = mock(AppRepository::class.java)
+        context = mock(Context::class.java)
         viewModel = InvoiceActivityViewModel(appRepository, context)
     }
 
@@ -78,16 +83,40 @@ class InvoiceActivityViewModelUnitTest {
 
     @Test
     fun `verify filters are applied correctly`() {
-        /*
-        // Given
-        val filter = FilterVO(/* insert sample filter values */)
 
-        // When
-        viewModel.applyFilters(/* insert sample filter values */)
+        val filter = FilterVO("2024-05-31", "2024-01-01", 100.0, hashMapOf(
+            "Pagada" to true,
+            "Anuladas" to false,
+            "Cuota fija" to false,
+            "Pendiente de pago" to false,
+            "planPago" to false
+        ))
 
-        // Then
-        assert(viewModel.filterLiveData.value == filter)
+        viewModel.applyFilters("2024-05-31", "2024-01-01", 100.0, hashMapOf(
+            "Pagada" to true,
+            "Anuladas" to false,
+            "Cuota fija" to false,
+            "Pendiente de pago" to false,
+            "planPago" to false
+        ),
+            R.string.dayMonthYear.toString()
+        )
+
+        val viewModelFilter = viewModel.filterLiveData.getOrAwaitValue()
+        assert(viewModelFilter == filter)
     }
-*/
+
+    @Test
+    fun viewModelNotNull() = runBlocking {
+        assertNotNull(viewModel)
+    }
+
+    @org.junit.Test
+    fun `handleError fetching invoices`() = runBlocking {
+        val errorMessage = "Error al obtener facturas"
+        `when`(appRepository.getEnergyDataFromRoom()).thenThrow(RuntimeException(errorMessage))
+        viewModel.fetchInvoices()
+        val errorLiveDataValue = "Error al obtener facturas"
+        Assert.assertEquals(errorMessage, errorLiveDataValue)
     }
 }

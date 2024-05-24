@@ -78,7 +78,7 @@ class InvoicesFiltersFragment : Fragment() {
             val maxDate: String =
                 if (binding.btMaxDate.text == getString(R.string.dayMonthYear)) LocalDate.now().toDateString("dd/MM/yyyy") else binding.btMaxDate.text.toString()
 
-            viewModel.applyFilters(maxDate, minDate, maxValueSlider, status)
+            viewModel.applyFilters(maxDate, minDate, maxValueSlider, status, getString(R.string.dayMonthYear))
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
