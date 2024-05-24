@@ -7,12 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.domain.SignUpUseCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpActivityViewModel : ViewModel() {
-
-   private val signUpUseCase = SignUpUseCase(FirebaseAuth.getInstance())
+@HiltViewModel
+class SignUpActivityViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase): ViewModel() {
 
     private val _signUpResult = MutableLiveData<Result<FirebaseUser?>>()
     val signUpResult: LiveData<Result<FirebaseUser?>>

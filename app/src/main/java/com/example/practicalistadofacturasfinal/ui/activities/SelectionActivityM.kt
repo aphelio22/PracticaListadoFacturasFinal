@@ -13,17 +13,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivityMainBinding
 import com.example.practicalistadofacturasfinal.ui.model.PracticeVO
 import com.example.practicalistadofacturasfinal.ui.model.adapter.PracticeAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.SelectionActivityMViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SelectionActivityM : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var practiceList: List<PracticeVO>
     private lateinit var adapter: PracticeAdapter
     private val selectionActivityMViewModel: SelectionActivityMViewModel by viewModels()
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
 
     companion object {
         fun create(context: Context): Intent {
@@ -34,7 +39,7 @@ class SelectionActivityM : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()

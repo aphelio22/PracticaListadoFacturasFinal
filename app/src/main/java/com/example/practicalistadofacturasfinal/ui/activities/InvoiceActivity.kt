@@ -8,19 +8,22 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivityInvoiceBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class InvoiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInvoiceBinding
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         MyApplication()
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivityInvoiceBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -11,17 +11,23 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.practicalistadofacturasfinal.ui.fragments.FragmentPopUp
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivitySignUpBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.SignUpActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private val signUpActivityViewModel: SignUpActivityViewModel by viewModels()
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)

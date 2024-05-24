@@ -2,10 +2,11 @@ package com.example.practicalistadofacturasfinal.domain
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class SignUpUseCase(private val firebaseAuth: FirebaseAuth) {
+class SignUpUseCase @Inject constructor(private val firebaseAuth: FirebaseAuth) {
 
     suspend operator fun invoke(
         email: String,

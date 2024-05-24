@@ -10,14 +10,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivityWebViewBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WebViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWebViewBinding
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         enableEdgeToEdge()

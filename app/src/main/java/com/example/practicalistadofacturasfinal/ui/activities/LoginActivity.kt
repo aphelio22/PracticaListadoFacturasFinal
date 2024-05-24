@@ -31,12 +31,9 @@ class LoginActivity : AppCompatActivity() {
     private val loginActivityViewModel: LoginActivityViewModel by viewModels()
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var encryptedPrefs: SharedPreferences
-
-    @Inject
-    lateinit var appRepository: AppRepository
-
-    @Inject
-    lateinit var appContext: Context
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var appContext: Context
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
 
     private fun createEncryptedPreferences(context: Context): SharedPreferences {
         val masterKeyAlias = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)

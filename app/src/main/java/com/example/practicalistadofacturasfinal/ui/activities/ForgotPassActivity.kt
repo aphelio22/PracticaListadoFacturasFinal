@@ -10,17 +10,22 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivityForgotPassBinding
 import com.example.practicalistadofacturasfinal.ui.viewmodel.ForgotPassViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ForgotPassActivity : AppCompatActivity() {
     private lateinit var binding: ActivityForgotPassBinding
     private val forgotPassViewModel: ForgotPassViewModel by viewModels()
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivityForgotPassBinding.inflate(layoutInflater)
         setContentView(binding.root)

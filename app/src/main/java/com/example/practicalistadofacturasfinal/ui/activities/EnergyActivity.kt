@@ -9,22 +9,25 @@ import androidx.fragment.app.Fragment
 import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.RemoteConfigManager
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.databinding.ActivityEnergyBinding
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergyFirstFragment
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergySecondFragment
 import com.example.practicalistadofacturasfinal.ui.fragments.EnergyThirdFragment
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class EnergyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnergyBinding
-    private var remoteConfigManager: RemoteConfigManager = RemoteConfigManager.getInstance()
+    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var remoteConfigManager: RemoteConfigManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         MyApplication()
-        remoteConfigManager.fetchAndActivateConfig()
+        appRepository.fetchAndActivateConfig()
         showAppTheme()
         binding = ActivityEnergyBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.domain.ForgotPassUseCase
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ForgotPassViewModel: ViewModel() {
-    private val forgotPassUseCase = ForgotPassUseCase(FirebaseAuth.getInstance())
-
+@HiltViewModel
+class ForgotPassViewModel @Inject constructor(private val forgotPassUseCase: ForgotPassUseCase): ViewModel() {
     private val _resetPassResult = MutableLiveData<Result<Unit>>()
     val resetPassResult: LiveData<Result<Unit>>
         get() = _resetPassResult

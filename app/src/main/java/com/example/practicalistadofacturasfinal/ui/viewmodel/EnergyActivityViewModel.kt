@@ -5,13 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.data.AppRepository
-import com.example.practicalistadofacturasfinal.data.retrofit.network.AppService
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import javax.inject.Inject
 
 @HiltViewModel

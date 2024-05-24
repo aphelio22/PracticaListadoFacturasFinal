@@ -3,6 +3,7 @@ package com.example.practicalistadofacturasfinal.di
 import android.content.Context
 import androidx.room.Room
 import co.infinum.retromock.Retromock
+import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.core.network.retromock.ResourceBodyFactory
 import com.example.practicalistadofacturasfinal.data.retrofit.network.InvoiceClient
 import com.example.practicalistadofacturasfinal.data.retrofit.network.InvoiceClientRetroMock
@@ -11,6 +12,7 @@ import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -51,7 +53,18 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFirebaseRemoteConfig(): FirebaseRemoteConfig {
-        return FirebaseRemoteConfig.getInstance()
+        return FirebaseRemoteConfig.getInstance().apply {
+            val configSettings = remoteConfigSettings {
+                minimumFetchIntervalInSeconds = 1 // O el valor que necesites
+            }
+            setConfigSettingsAsync(configSettings)
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideRemoteConfigManager(remoteConfig: FirebaseRemoteConfig): RemoteConfigManager {
+        return RemoteConfigManager(remoteConfig)
     }
 
 

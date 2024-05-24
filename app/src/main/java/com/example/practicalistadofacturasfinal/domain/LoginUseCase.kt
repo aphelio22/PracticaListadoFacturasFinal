@@ -2,10 +2,11 @@ package com.example.practicalistadofacturasfinal.domain
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class LoginUseCase(private val firebaseAuth: FirebaseAuth) {
+class LoginUseCase @Inject constructor(private val firebaseAuth: FirebaseAuth) {
     suspend operator fun invoke(email: String?, password: String?): Result<FirebaseUser?> {
         return suspendCoroutine { continuation ->
             if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
