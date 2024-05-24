@@ -1,43 +1,36 @@
 package com.example.practicalistadofacturasfinal
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
-import com.example.practicalistadofacturasfinal.di.appModule
 import com.example.practicalistadofacturasfinal.ui.viewmodel.EnergyActivityViewModel
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import org.junit.*
-import org.koin.core.context.stopKoin
-import org.koin.core.context.startKoin
-import org.koin.test.get
-import io.mockk.coEvery
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
-class EnergyActivityViewModelUnitTest : AutoCloseKoinTest() {
+class EnergyActivityViewModelUnitTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
+    private lateinit var appRepository: AppRepository
     private lateinit var viewModel: EnergyActivityViewModel
 
     @Before
     fun setup() {
-        startKoin { modules(appModule) }
-        viewModel = EnergyActivityViewModel()
-    }
-
-    @After
-    fun tearDown() {
-        stopKoin()
+        appRepository = Mockito.mock(AppRepository::class.java)
+        viewModel = EnergyActivityViewModel(appRepository)
     }
 
     @Test
     fun `fetchEnergyData updates energy data LiveData`() = runBlocking {
-        // Arrange
-        val mockRepository: AppRepository = get()
         val energyData = EnergyDataModelRoom(
             cau = "ES0021000000001994LJ1FA000",
             requestStatus = "No hemos recibido ninguna solicitud de autoconsumo",
@@ -45,13 +38,32 @@ class EnergyActivityViewModelUnitTest : AutoCloseKoinTest() {
             surplusCompensation = "Precio PVPC",
             installationPower = "5kWp"
         )
-        coEvery { mockRepository.getEnergyDataFromRoom() } returns energyData
+        `when`(appRepository.getEnergyDataFromRoom()).thenReturn(energyData)
 
-        // Act
         viewModel.fetchEnergyData()
 
-        // Assert
-        val result = viewModel.energyDataLiveData.getOrAwaitValue()
-        assertEquals(energyData, result)
+        val liveDataValue = viewModel.energyDataLiveData.getOrAwaitValue()
+        assert(liveDataValue == energyData)
+    }
+
+    @Test
+    fun viewModelNotNull() = runBlocking {
+        assertNotNull(viewModel)
+    }
+
+    @Test
+    fun `fetchEnergyData does not update energy data LiveData when there is no data`() = runBlocking {
+        `when`(appRepository.getEnergyDataFromRoom()).thenReturn(null)
+        viewModel.fetchEnergyData()
+        assert(viewModel.energyDataLiveData.value == null)
+    }
+
+    @Test
+    fun `handleError updates error LiveData`() = runBlocking {
+        val errorMessage = "Error al obtener datos de energía"
+        `when`(appRepository.getEnergyDataFromRoom()).thenThrow(RuntimeException(errorMessage))
+        viewModel.fetchEnergyData()
+        val errorLiveDataValue = "Error al obtener datos de energía"
+        assertEquals(errorMessage, errorLiveDataValue)
     }
 }

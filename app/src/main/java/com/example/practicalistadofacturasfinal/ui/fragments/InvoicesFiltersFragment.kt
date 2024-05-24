@@ -92,12 +92,14 @@ class InvoicesFiltersFragment : Fragment() {
     }
 
     private fun initSeekBar() {
-        val maxAmount = viewModel.maxAmount.toInt() + 1
-        binding.seekBar.max = maxAmount
+        val maxAmount = viewModel.maxAmount.value?.toInt()?.plus(1)
+        if (maxAmount != null) {
+            binding.seekBar.max = maxAmount
+        }
         binding.tvMaxSeekbar.text = "$maxAmount"
         binding.tvMinSeekbar.text = "0"
         binding.seekBarValue.text = "$maxAmount"
-        binding.seekBar.progress = viewModel.maxAmount.toInt()
+        binding.seekBar.progress = viewModel.maxAmount.value?.toInt()?.plus(1)!!
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -220,7 +222,7 @@ class InvoicesFiltersFragment : Fragment() {
     private fun resetFilters () {
         binding.btMinDate.text = getString(R.string.dayMonthYear)
         binding.btMaxDate.text = getString(R.string.dayMonthYear)
-        binding.seekBar.progress = viewModel.maxAmount.toInt() + 1
+        binding.seekBar.progress = viewModel.maxAmount.value?.toInt()?.plus(1)!!
         binding.cbPaid.isChecked = false
         binding.cbCanceled.isChecked = false
         binding.cbFixedPayment.isChecked = false

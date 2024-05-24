@@ -4,6 +4,8 @@ coreTesting = "2.2.0"
 firebaseAuthTesting = "19.1.0."
 firebaseBom = "32.8.1"
 hiltAndroid = "2.48.1"
+hiltAndroidCompiler = "2.48"
+hiltAndroidTesting = "2.42"
 koinAndroid = "3.4.0"
 koinTest = "3.2.0"
 kotlin = "1.9.0"
@@ -48,6 +50,8 @@ firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-config = { module = "com.google.firebase:firebase-config" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

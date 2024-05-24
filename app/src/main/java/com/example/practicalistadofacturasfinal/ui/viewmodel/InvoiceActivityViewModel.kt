@@ -37,7 +37,7 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
     val filteredInvoicesLiveData: LiveData<List<InvoiceModelRoom>>
         get() = _filteredInvoicesLiveData
 
-    private var _maxAmount: Float = 0.0f
+    private var _maxAmount = MutableLiveData<Float>()
     val maxAmount
         get() = _maxAmount
 
@@ -67,7 +67,7 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
         }
     }
 
-    private fun fetchInvoices() {
+    fun fetchInvoices() {
         viewModelScope.launch(Dispatchers.IO) {
             _filteredInvoicesLiveData.postValue(appRepository.getAllInvoicesFromRoom())
             try {
@@ -88,7 +88,7 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
                     //verifyFilters()
                 }
             } catch (e: Exception) {
-                Log.d("Error", e.printStackTrace().toString())
+                //Log.d("Error", e.printStackTrace().toString())
             }
         }
     }
@@ -113,15 +113,17 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
     }
 
     private fun findMaxAmount() {
-        var max = 0.0
+        viewModelScope.launch(Dispatchers.IO) {
+            var max = 0.0
 
-        for (invoice in invoices) {
-            val actualInvoiceAmount = invoice.importeOrdenacion
-            if (max < actualInvoiceAmount) {
-                max = actualInvoiceAmount
+            for (invoice in invoices) {
+                val actualInvoiceAmount = invoice.importeOrdenacion
+                if (max < actualInvoiceAmount) {
+                    max = actualInvoiceAmount
+                }
             }
+            _maxAmount.postValue(max.toFloat())
         }
-        _maxAmount = max.toFloat()
     }
 
     fun applyFilters(

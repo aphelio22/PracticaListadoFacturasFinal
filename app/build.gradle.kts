@@ -63,6 +63,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.koin.android)
+    testImplementation (libs.hilt.android.testing)
+    kaptTest (libs.hilt.android.compiler)
     testImplementation (libs.mockito.core.v570)
     testImplementation (libs.koin.test)
     testImplementation(libs.androidx.core.testing)
