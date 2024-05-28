@@ -1,25 +1,19 @@
 package com.example.practicalistadofacturasfinal
 
 import android.content.Context
-import android.util.Xml
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
-import io.mockk.every
 import junit.framework.Assert
 import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
-import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import org.xmlpull.v1.XmlPullParser
-import javax.inject.Inject
 import kotlin.test.Test
 
 @ExperimentalCoroutinesApi
@@ -40,7 +34,6 @@ class InvoiceActivityViewModelUnitTest {
 
     @Test
     fun `verify invoices are fetched`() = runBlocking {
-        // Given
         val invoiceList = listOf(
             InvoiceModelRoom("Pendiente de pago", 1.56, "07/02/2019"),
             InvoiceModelRoom("Pagada", 25.14, "05/02/2019"),
@@ -53,7 +46,6 @@ class InvoiceActivityViewModelUnitTest {
         )
         `when`(appRepository.getAllInvoicesFromRoom()).thenReturn(invoiceList)
 
-        // When
         viewModel.fetchInvoices()
 
         val liveDataValue = viewModel.filteredInvoicesLiveData.getOrAwaitValue()

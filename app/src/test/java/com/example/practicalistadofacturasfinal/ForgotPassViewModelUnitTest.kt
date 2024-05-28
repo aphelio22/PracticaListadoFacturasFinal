@@ -33,7 +33,6 @@ class ForgotPassViewModelUnitTest {
 
     @Test
     fun `verify resetPassword invokes use case and updates LiveData`() = runBlocking {
-        // Given
         val email = "test@example.com"
         val expectedResult = Result.success(Unit)
         `when`(forgotPassUseCase.invoke(email)).thenReturn(expectedResult)
@@ -41,10 +40,8 @@ class ForgotPassViewModelUnitTest {
         val observer = mock(Observer::class.java) as Observer<Result<Unit>>
         viewModel.resetPassResult.observeForever(observer)
 
-        // When
         viewModel.resetPassword(email)
 
-        // Then
         verify(forgotPassUseCase).invoke(email)
         verify(observer).onChanged(expectedResult)
         viewModel.resetPassResult.removeObserver(observer)
@@ -59,13 +56,10 @@ class ForgotPassViewModelUnitTest {
 
     @Test
     fun `isEmailValid should return false for empty email`() {
-        // Given
         val email = ""
 
-        // When
         val result = viewModel.isEmailValid(email)
 
-        // Then
         assertFalse(result)
     }
 }

@@ -30,7 +30,6 @@ class SignUpUseCaseUnitTest {
 
     @Test
     fun `sign up with matching passwords should return user`() = runBlocking {
-        // Arrange
         val email = "test@example.com"
         val password = "password"
         val confirmPassword = "password"
@@ -47,16 +46,13 @@ class SignUpUseCaseUnitTest {
         doReturn(true).`when`(task).isSuccessful
         doReturn(firebaseUser).`when`(firebaseAuth).currentUser
 
-        // Act
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        // Assert
         assertEquals(firebaseUser, result.getOrNull())
     }
 
     @Test
     fun `sign up with non-matching passwords should return error`() = runBlocking {
-        // Arrange
         val email = "test@example.com"
         val password = "password"
         val confirmPassword = "wrongPassword"
@@ -71,17 +67,14 @@ class SignUpUseCaseUnitTest {
         doReturn(task).`when`(firebaseAuth).createUserWithEmailAndPassword(anyString(), anyString())
         doReturn(true).`when`(task).isSuccessful
 
-        // Act
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        // Assert
         assertTrue(result.isFailure)
         assertEquals("Passwords do not match", result.exceptionOrNull()?.message)
     }
 
     @Test
     fun `sign up with Firebase failure should return failure`() = runBlocking {
-        // Arrange
         val email = "test@example.com"
         val password = "password"
         val confirmPassword = "password"
@@ -97,17 +90,14 @@ class SignUpUseCaseUnitTest {
         doReturn(false).`when`(task).isSuccessful
         doReturn(Exception("Firebase error")).`when`(task).exception
 
-        // Act
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        // Assert
         assertTrue(result.isFailure)
         assertEquals("Firebase error", result.exceptionOrNull()?.message)
     }
 
     @Test
     fun `sign up with network exception should return error`() = runBlocking {
-        // Arrange
         val email = "test@example.com"
         val password = "password"
         val confirmPassword = "password"
@@ -124,22 +114,18 @@ class SignUpUseCaseUnitTest {
         doReturn(false).`when`(task).isSuccessful
         doReturn(networkException).`when`(task).exception
 
-        // Act
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        // Assert
         assertTrue(result.isFailure)
         assertEquals("Network error", result.exceptionOrNull()?.message)
     }
 
     @Test
     fun `sign up with empty email should return error`() = runBlocking {
-        // Arrange
         val email = ""
         val password = "password"
         val confirmPassword = "password"
 
-        // Mock task to be returned
         val task: Task<AuthResult> = mock(Task::class.java) as Task<AuthResult>
 
         doAnswer { invocation ->
@@ -150,22 +136,18 @@ class SignUpUseCaseUnitTest {
 
         doReturn(task).`when`(firebaseAuth).createUserWithEmailAndPassword(anyString(), anyString())
 
-        // Act
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        // Assert
         assertTrue(result.isFailure)
         assertEquals("El correo electrónico no puede estar vacío", result.exceptionOrNull()?.message)
     }
 
     @Test
     fun `sign up with empty password should return error`() = runBlocking {
-        // Arrange
         val email = "test@example.com"
         val password = ""
         val confirmPassword = ""
 
-        // Mock task to be returned
         val task: Task<AuthResult> = mock(Task::class.java) as Task<AuthResult>
 
         doAnswer { invocation ->
@@ -176,10 +158,8 @@ class SignUpUseCaseUnitTest {
 
         doReturn(task).`when`(firebaseAuth).createUserWithEmailAndPassword(anyString(), anyString())
 
-        // Act
         val result = signUpUseCase.invoke(email, password, confirmPassword)
 
-        // Assert
         assertTrue(result.isFailure)
         assertEquals("La contraseña no puede estar vacía", result.exceptionOrNull()?.message)
     }
