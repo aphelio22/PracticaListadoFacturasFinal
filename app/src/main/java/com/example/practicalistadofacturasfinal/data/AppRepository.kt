@@ -29,6 +29,10 @@ class AppRepository @Inject constructor(private val invoiceDAO: InvoiceDAO, priv
         return appService.getInvoicesFromRetroMock()
     }
 
+    private suspend fun getInvoicesFromKtor(): List<InvoiceResponse>? {
+        return appService.getInvoicesFromKtor()
+    }
+
     private fun insertEnergyDataInRoom(energyDataModelRoom: EnergyDataModelRoom) {
         energyDao.insertEnergyDataInRoom(energyDataModelRoom)
     }
@@ -83,6 +87,18 @@ class AppRepository @Inject constructor(private val invoiceDAO: InvoiceDAO, priv
     suspend fun fetchAndInsertInvoicesFromAPI() {
         val invoicesFromAPI = getInvoicesFromAPI() ?: emptyList()
         val invoicesRoom = invoicesFromAPI.map { invoice ->
+            InvoiceModelRoom(
+                descEstado = invoice.descEstado,
+                importeOrdenacion = invoice.importeOrdenacion,
+                fecha = invoice.fecha
+            )
+        }
+        insertInvoicesInRoom(invoicesRoom)
+    }
+
+    suspend fun fetchAndInsertInvoicesFromKtor() {
+        val invoicesFromKtor = getInvoicesFromKtor() ?: emptyList()
+        val invoicesRoom = invoicesFromKtor.map { invoice ->
             InvoiceModelRoom(
                 descEstado = invoice.descEstado,
                 importeOrdenacion = invoice.importeOrdenacion,

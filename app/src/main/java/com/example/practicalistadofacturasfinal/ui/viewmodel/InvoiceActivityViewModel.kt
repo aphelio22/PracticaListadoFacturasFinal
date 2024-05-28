@@ -75,7 +75,7 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
                     when (useAPI) {
                         true -> {
                             appRepository.deleteAllInvoicesFromRoom()
-                            appRepository.fetchAndInsertInvoicesFromAPI()
+                            appRepository.fetchAndInsertInvoicesFromKtor()
                             }
                         false ->{
                             appRepository.deleteAllInvoicesFromRoom()

@@ -36,3 +36,4 @@ interface InvoiceClient {
     @GET("facturas")
     suspend fun getDataFromAPI(): Response<InvoiceRepositoryListResponse>
 }
+
