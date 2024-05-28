@@ -14,9 +14,8 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
 
-class ForgotPasswordUnitTest {
+class ForgotPassUseCaseUnitTest {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var forgotPassUseCase: ForgotPassUseCase

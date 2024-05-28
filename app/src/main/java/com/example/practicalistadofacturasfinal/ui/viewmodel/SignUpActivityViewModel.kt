@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practicalistadofacturasfinal.domain.SignUpUseCase
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,9 +19,21 @@ class SignUpActivityViewModel @Inject constructor(private val signUpUseCase: Sig
         get() = _signUpResult
 
     fun signUp(email: String, password: String, confirmPassword: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = signUpUseCase.invoke(email, password, confirmPassword)
-            _signUpResult.postValue(result)
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            val errorMessage = when {
+                email.isEmpty() -> "No hay email"
+                password.isEmpty() -> "Faltan las contraseñas"
+                confirmPassword.isEmpty() -> "Falta la contraseña de confirmación"
+                else -> "Fatan el email y las contraseñas"
+            }
+            _signUpResult.postValue(Result.failure(IllegalArgumentException(errorMessage)))
+        } else if (password != confirmPassword) {
+            _signUpResult.postValue(Result.failure(IllegalArgumentException("Las contraseñas no coinciden")))
+        } else {
+            viewModelScope.launch(Dispatchers.IO) {
+                val result = signUpUseCase.invoke(email, password, confirmPassword)
+                _signUpResult.postValue(result)
+            }
         }
     }
 }

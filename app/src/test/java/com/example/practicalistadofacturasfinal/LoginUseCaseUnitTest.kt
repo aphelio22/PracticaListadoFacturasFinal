@@ -19,7 +19,7 @@ import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 
-class LoginUnitTest {
+class LoginUseCaseUnitTest {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var loginUseCase: LoginUseCase

@@ -26,7 +26,6 @@ class LoginActivityViewModel @Inject constructor(private val loginUseCase: Login
         }
     }
 
-    // Método para verificar si la información de inicio de sesión es válida
     fun isLoginInfoValid(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
     }

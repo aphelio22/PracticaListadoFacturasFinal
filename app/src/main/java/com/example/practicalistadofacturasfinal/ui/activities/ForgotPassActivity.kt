@@ -20,6 +20,7 @@ import javax.inject.Inject
 class ForgotPassActivity : AppCompatActivity() {
     private lateinit var binding: ActivityForgotPassBinding
     private val forgotPassViewModel: ForgotPassViewModel by viewModels()
+    
     @Inject lateinit var appRepository: AppRepository
     @Inject lateinit var remoteConfigManager: RemoteConfigManager
     override fun onCreate(savedInstanceState: Bundle?) {

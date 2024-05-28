@@ -2,10 +2,8 @@ package com.example.practicalistadofacturasfinal
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.domain.ForgotPassUseCase
 import com.example.practicalistadofacturasfinal.ui.viewmodel.ForgotPassViewModel
-import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse

@@ -7,7 +7,7 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
-class LogOutUnitTest {
+class LogOutUseCaseUnitTest {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var logOutUseCase: LogOutUseCase

@@ -7,20 +7,17 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.Mock
 import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
 
-class SignUpUnitTest {
+class SignUpUseCaseUnitTest {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var signUpUseCase: SignUpUseCase
