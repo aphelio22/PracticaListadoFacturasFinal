@@ -65,30 +65,46 @@
             android:layout_height="wrap_content"
             android:text="@string/activateRetrofrit_InvoiceListFragment"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvInvoices" />
 
-        <androidx.appcompat.widget.AppCompatToggleButton
-            android:id="@+id/toggleButtonKtor"
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleRetroKtor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/rvInvoices"
+            app:checkedButton="@+id/button_retroKtor"
+            app:layout_constraintTop_toBottomOf="@id/rvInvoices"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvInvoiceTitle"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:singleSelection="true">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="26dp"
-            android:text="Ktor"
-            app:layout_constraintBottom_toTopOf="@+id/rvInvoices"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/toggleButtonKtor"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_retromock"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retromock"
+                android:textSize="10dp" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_retrofit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retrofit"
+                android:textSize="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_ktor"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ktor"
+                android:textSize="10dp" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

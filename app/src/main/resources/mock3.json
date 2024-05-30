@@ -2,7 +2,7 @@
   "numFacturas": 8,
   "facturas": [
     {
-      "descEstado": "Pendiente de pago",
+      "descEstado": "Patata (ejemplo)",
       "importeOrdenacion": 1.56,
       "fecha": "07/02/2019"
     },

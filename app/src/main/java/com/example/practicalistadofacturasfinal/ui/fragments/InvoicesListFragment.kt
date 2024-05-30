@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practicalistadofacturasfinal.R
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.databinding.FragmentInvoicesListBinding
+import com.example.practicalistadofacturasfinal.enums.ApiType
 import com.example.practicalistadofacturasfinal.ui.activities.SelectionActivityM
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
@@ -35,14 +36,15 @@ class InvoicesListFragment : Fragment() {
         setOnClickListener()
         initViewModel()
 
-        binding.switchRetromock.setOnClickListener {
-            if (binding.switchRetromock.isChecked) {
-                viewModel.switchMode(true)
-            } else {
-                viewModel.switchMode(false)
+        binding.toggleRetroKtor.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.button_retromock -> viewModel.setSelectedApiType(ApiType.RETROMOCK)
+                    R.id.button_retrofit -> viewModel.setSelectedApiType(ApiType.RETROFIT)
+                    R.id.button_ktor -> viewModel.setSelectedApiType(ApiType.KTOR)
+                }
             }
         }
-
     }
 
     private fun initViewModel() {
@@ -52,9 +54,7 @@ class InvoicesListFragment : Fragment() {
             } else {
                 binding.tvEmptyList.visibility = View.GONE
             }
-
             initRecyclerView(invoices)
-            initDecoration()
         }
 
         viewModel.filterLiveData.observe(viewLifecycleOwner) {filter ->
@@ -65,11 +65,12 @@ class InvoicesListFragment : Fragment() {
 
         viewModel.showRemoteConfig.observe(viewLifecycleOwner) {showSwitch ->
             if (showSwitch) {
-                binding.switchRetromock.visibility = View.VISIBLE
+                binding.toggleRetroKtor.visibility = View.VISIBLE
             } else {
-                binding.switchRetromock.visibility = View.GONE
+                binding.toggleRetroKtor.visibility = View.GONE
             }
         }
+        initDecoration()
     }
 
     private fun initDecoration() {

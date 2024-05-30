@@ -16,6 +16,7 @@ import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.data.AppRepository
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
+import com.example.practicalistadofacturasfinal.enums.ApiType
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +50,7 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
     val showRemoteConfig: LiveData<Boolean>
         get() = _showRemoteConfig
 
-    private var useAPI = false
+    private var selectedApiType = ApiType.RETROMOCK
 
     init {
         fetchInvoices()
@@ -72,14 +73,18 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
             _filteredInvoicesLiveData.postValue(appRepository.getAllInvoicesFromRoom())
             try {
                 if (isInternetAvailable()) {
-                    when (useAPI) {
-                        true -> {
+                    when (selectedApiType) {
+                        ApiType.RETROFIT -> {
                             appRepository.deleteAllInvoicesFromRoom()
-                            appRepository.fetchAndInsertInvoicesFromKtor()
+                            appRepository.fetchAndInsertInvoicesFromAPI()
                             }
-                        false ->{
+                        ApiType.RETROMOCK -> {
                             appRepository.deleteAllInvoicesFromRoom()
                             appRepository.fetchAndInsertInvoicesFromMock()
+                        }
+                        ApiType.KTOR -> {
+                            appRepository.deleteAllInvoicesFromRoom()
+                            appRepository.fetchAndInsertInvoicesFromKtor()
                         }
                     }
                     invoices = appRepository.getAllInvoicesFromRoom()
@@ -93,8 +98,8 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
         }
     }
 
-    fun switchMode(apiMode: Boolean) {
-        useAPI = apiMode
+    fun setSelectedApiType(apiType: ApiType) {
+        selectedApiType = apiType
         fetchInvoices()
     }
 
