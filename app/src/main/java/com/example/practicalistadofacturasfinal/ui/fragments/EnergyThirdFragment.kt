@@ -25,12 +25,17 @@ class EnergyThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.energyDataLiveData.observe(viewLifecycleOwner) { energyData ->
-            binding.etCau.setText(energyData.cau)
-            binding.etRequestStatus.setText(energyData.requestStatus)
-            binding.etSelfConsumption.setText(energyData.selfConsumptionType)
+            binding.etCauContent.setText(energyData.cau)
+            binding.etRequestStatusContent.setText(energyData.requestStatus)
+            binding.etSelfConsumptionContent.setText(energyData.selfConsumptionType)
             binding.etSurplusCompensation.setText(energyData.surplusCompensation)
             binding.etInstallationPower.setText(energyData.installationPower)
         }
 
+        binding.etRequestStatus.setEndIconOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val customPopupFragment = FragmentPopUp("El tiempo estimado de activación de tu autoconsumo es de 1 a 2 meses, este variará en función de tu comunidad autónoma y distribuidora.")
+            customPopupFragment.show(fragmentManager, "FragmentPopUp")
+        }
     }
 }

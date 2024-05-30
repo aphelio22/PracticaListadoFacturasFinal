@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
     tools:context=".ui.fragments.EnergyThirdFragment">
 
@@ -11,21 +11,30 @@
         android:id="@+id/tvCau"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/cauTitle_EnergyThirdFragment"
+        android:text="@string/cauTitle_EnergyThirdFragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etCau"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvCau"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/cauContent_EnergyThirdFragment"
-        android:inputType="none"
         android:focusable="false"
-        />
+        android:inputType="none"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCau">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCauContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="none"
+            tools:text="@string/cauContent_EnergyThirdFragment" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvRequestStatus"
@@ -34,19 +43,31 @@
         android:layout_marginTop="20dp"
         android:text="@string/requestStatus_EnergyThirdFragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCau"
-        />
+        app:layout_constraintTop_toBottomOf="@id/etCau" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etRequestStatus"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvRequestStatus"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/requestStatusContent_EnergyThirdFragment"
-        android:inputType="none"
         android:focusable="false"
-        />
+        android:inputType="none"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:endIconDrawable="@drawable/baseline_info_outline_24"
+        app:endIconMode="custom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRequestStatus"
+        tools:text="@string/requestStatusContent_EnergyThirdFragment">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRequestStatusContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="none"
+            tools:text="@string/requestStatusContent_EnergyThirdFragment" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvSelfConsumption"
@@ -54,20 +75,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/selfConsumptionTitle_EnergyThirdFragment"
-        app:layout_constraintTop_toBottomOf="@id/etRequestStatus"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/etRequestStatus" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etSelfConsumption"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvSelfConsumption"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/selfConsumptionContent_EnergyThirdFragment"
-        android:inputType="none"
-        android:focusable="false"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tvSelfConsumption">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSelfConsumptionContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="none"
+            tools:text="@string/selfConsumptionContent_EnergyThirdFragment" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvSurplusCompensation"
@@ -75,20 +103,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/surplusCompensationTitle_EnergyThridFragment"
-        app:layout_constraintTop_toBottomOf="@id/etSelfConsumption"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/etSelfConsumption" />
 
     <EditText
         android:id="@+id/etSurplusCompensation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvSurplusCompensation"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/surplusCompensationContent_EnergyThirdFragment"
-        android:inputType="none"
         android:focusable="false"
-        />
+        android:inputType="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSurplusCompensation"
+        tools:text="@string/surplusCompensationContent_EnergyThirdFragment" />
 
     <TextView
         android:id="@+id/tvInstallationPower"
@@ -96,20 +122,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/installationPowerTitle_EnergyThirdFragment"
-        app:layout_constraintTop_toBottomOf="@id/etSurplusCompensation"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/etSurplusCompensation" />
 
     <EditText
         android:id="@+id/etInstallationPower"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvInstallationPower"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/installationPowerContent_EnergyThirdFragment"
-        android:inputType="none"
         android:focusable="false"
-        />
+        android:inputType="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInstallationPower"
+        tools:text="@string/installationPowerContent_EnergyThirdFragment" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
