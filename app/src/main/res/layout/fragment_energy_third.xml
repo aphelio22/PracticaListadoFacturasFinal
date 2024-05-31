@@ -106,15 +106,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etSelfConsumption" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etSurplusCompensation"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
         android:inputType="none"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSurplusCompensation"
-        tools:text="@string/surplusCompensationContent_EnergyThirdFragment" />
+        app:layout_constraintTop_toBottomOf="@id/tvSurplusCompensation">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSurplusCompensationContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="none"
+            tools:text="@string/surplusCompensationContent_EnergyThirdFragment" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvInstallationPower"
@@ -125,15 +137,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etSurplusCompensation" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etInstallationPower"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
         android:inputType="none"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvInstallationPower"
-        tools:text="@string/installationPowerContent_EnergyThirdFragment" />
+        app:layout_constraintTop_toBottomOf="@id/tvInstallationPower">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etInstallationPowerContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="none"
+            tools:text="@string/installationPowerContent_EnergyThirdFragment" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

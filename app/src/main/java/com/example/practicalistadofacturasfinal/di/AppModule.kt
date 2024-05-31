@@ -69,7 +69,7 @@ class AppModule {
     fun provideFirebaseRemoteConfig(): FirebaseRemoteConfig {
         return FirebaseRemoteConfig.getInstance().apply {
             val configSettings = remoteConfigSettings {
-                minimumFetchIntervalInSeconds = 1 // O el valor que necesites
+                minimumFetchIntervalInSeconds = 1
             }
             setConfigSettingsAsync(configSettings)
         }
@@ -86,7 +86,7 @@ class AppModule {
     @Singleton
     fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://viewnextandroid.wiremockapi.cloud/") //Introduce el enlace de la API aquí.
+            .baseUrl("https://viewnextandroid.wiremockapi.cloud/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }

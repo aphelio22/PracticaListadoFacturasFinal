@@ -18,7 +18,6 @@ class EnergyThirdFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentEnergyThirdBinding.inflate(layoutInflater, container, false)
         return  binding.root
     }
@@ -28,8 +27,8 @@ class EnergyThirdFragment : Fragment() {
             binding.etCauContent.setText(energyData.cau)
             binding.etRequestStatusContent.setText(energyData.requestStatus)
             binding.etSelfConsumptionContent.setText(energyData.selfConsumptionType)
-            binding.etSurplusCompensation.setText(energyData.surplusCompensation)
-            binding.etInstallationPower.setText(energyData.installationPower)
+            binding.etSurplusCompensationContent.setText(energyData.surplusCompensation)
+            binding.etInstallationPowerContent.setText(energyData.installationPower)
         }
 
         binding.etRequestStatus.setEndIconOnClickListener {
