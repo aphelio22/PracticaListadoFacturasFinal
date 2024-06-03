@@ -1,10 +1,10 @@
 package com.example.practicalistadofacturasfinal.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,7 +17,6 @@ import com.example.practicalistadofacturasfinal.enums.ApiType
 import com.example.practicalistadofacturasfinal.ui.activities.SelectionActivityM
 import com.example.practicalistadofacturasfinal.ui.model.adapter.InvoiceAdapter
 import com.example.practicalistadofacturasfinal.ui.viewmodel.InvoiceActivityViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 class InvoicesListFragment : Fragment() {
     private lateinit var binding: FragmentInvoicesListBinding
