@@ -9,12 +9,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.practicalistadofacturasfinal.MyApplication
 import com.example.practicalistadofacturasfinal.R
-import com.example.practicalistadofacturasfinal.RemoteConfigManager
 import com.example.practicalistadofacturasfinal.constants.Constants
 import com.example.practicalistadofacturasfinal.data.AppRepository
-import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.example.practicalistadofacturasfinal.enums.ApiType
 import com.example.practicalistadofacturasfinal.ui.model.FilterVO
@@ -22,7 +19,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -143,8 +139,6 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
         ) {
             val filter = FilterVO(maxDate, minDate, maxValueSlider, status)
             _filterLiveData.postValue(filter)
-        } else {
-            // Si alguna de las dos fechas, o las dos, no equivale a "Dia/Mes/Año", se realiza el intent, sino salta el PopUp.
         }
     }
 
@@ -198,15 +192,11 @@ class InvoiceActivityViewModel @Inject constructor(private val appRepository: Ap
     ): List<InvoiceModelRoom> {
         val filteredInvoicesCheckBox = ArrayList<InvoiceModelRoom>()
         val status = filterLiveData.value?.status
-        //Se obtienen los estados de las CheckBoxes.
         val checkBoxPaid = status?.get(Constants.PAID_STRING) ?: false
         val checkBoxCanceled = status?.get(Constants.CANCELED_STRING) ?: false
         val checkBoxFixedPayment = status?.get(Constants.FIXED_PAYMENT_STRING) ?: false
         val checkBoxPendingPayment = status?.get(Constants.PENDING_PAYMENT_STRING) ?: false
         val checkBoxPaymentPlan = status?.get(Constants.PAYMENT_PLAN_STRING) ?: false
-
-        //Lista que contendrá las facturas filtradas por estado.
-
 
         if (checkBoxPaid || checkBoxCanceled || checkBoxFixedPayment || checkBoxPendingPayment || checkBoxPaymentPlan) {
             //Verificación de los estados de las facturas y los CheckBoxes seleccionados.
