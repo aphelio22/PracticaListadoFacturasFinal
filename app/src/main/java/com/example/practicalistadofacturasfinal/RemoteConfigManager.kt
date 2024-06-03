@@ -1,10 +1,7 @@
 package com.example.practicalistadofacturasfinal
 
 import android.util.Log
-import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.remoteConfig
-import com.google.firebase.remoteconfig.remoteConfigSettings
 import javax.inject.Inject
 import javax.inject.Singleton
 
