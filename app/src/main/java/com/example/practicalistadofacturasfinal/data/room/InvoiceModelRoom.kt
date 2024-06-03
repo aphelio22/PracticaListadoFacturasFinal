@@ -1,7 +1,6 @@
 package com.example.practicalistadofacturasfinal.data.room
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 @Entity(tableName = "invoice_table", primaryKeys = ["importeOrdenacion", "fecha"])
 class InvoiceModelRoom(

@@ -1,14 +1,12 @@
 package com.example.practicalistadofacturasfinal.data
 
 import android.util.Log
-import co.infinum.retromock.Retromock
 import com.example.practicalistadofacturasfinal.data.retrofit.network.AppService
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.Detail
 import com.example.practicalistadofacturasfinal.data.retrofit.network.response.InvoiceResponse
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataDAO
 import com.example.practicalistadofacturasfinal.data.room.EnergyDataModelRoom
 import com.example.practicalistadofacturasfinal.data.room.InvoiceDAO
-import com.example.practicalistadofacturasfinal.data.room.InvoiceDatabase
 import com.example.practicalistadofacturasfinal.data.room.InvoiceModelRoom
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import javax.inject.Inject
@@ -60,7 +58,6 @@ class AppRepository @Inject constructor(private val invoiceDAO: InvoiceDAO, priv
                     //remoteConfig.getBoolean("showSwitch")
                     Log.d("ÉXITO", "Configuración remota activada")
                 } else {
-                    // Error al activar la configuración remota
                     val exception = task.exception
                     Log.d("ERROR", "Error al activar la configuración remota", exception)
                 }
