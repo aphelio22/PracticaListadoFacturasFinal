@@ -8,42 +8,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.practicalistadofacturasfinal.databinding.PopUpBinding
 
-/**
- * Clase que representa un Fragmento de Diálogo (pop-up) para mostrar información adicional.
- */
 class FragmentPopUp(private val message: String): DialogFragment() {
 
-    /**
-     * Binding para la vista del Fragmento de Diálogo.
-     */
     private var _binding: PopUpBinding? = null
     private val binding get() = _binding!!
 
-    //Método propio para la creación de un diálogo.
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = PopUpBinding.inflate(LayoutInflater.from(context))
 
-        //Crea un constructor de diálogo utilizando el contexto de la actividad.
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)
 
         binding.mensajePopup.text = message
 
-        //Configura el comportamiento de los elementos de diseño.
         binding.botonCerrarPopUp.setOnClickListener {
-            dismiss() //Cierra el pop-up al hacer clic en el botón "Cerrar".
+            dismiss()
         }
 
-        //Crea el diálogo y configura su apariencia.
         val dialog = builder.create()
         val window = dialog.window
-        window?.setBackgroundDrawableResource(android.R.color.transparent) // Fondo transparente
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
         window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         return dialog
     }
 
-    //Método propio para la destrucción del diálogo.
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
