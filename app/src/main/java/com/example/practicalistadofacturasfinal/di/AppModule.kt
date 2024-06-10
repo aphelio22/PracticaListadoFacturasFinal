@@ -86,7 +86,7 @@ class AppModule {
     @Singleton
     fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://viewnextandroid.wiremockapi.cloud/")
+            .baseUrl("https://viewnextandroid4.wiremockapi.cloud/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
@@ -129,7 +129,7 @@ class AppModule {
     suspend fun getDataFromKtor(httpClient: HttpClient): List<InvoiceResponse>? {
         return withContext(Dispatchers.IO) {
             try {
-                val invoices = httpClient.get("https://viewnextandroid.wiremockapi.cloud/facturas")
+                val invoices = httpClient.get("https://viewnextandroid4.wiremockapi.cloud/facturas")
                     .body<InvoiceRepositoryListResponse>()
                     .facturas
                 invoices
